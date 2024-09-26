@@ -81,21 +81,8 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
 
-      <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Paternaire</span>
-
-          </a>
-
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Certif</span>
-            </span>
-          </a>
-
-        </li>
+      
+      
         <li>
           <a href="pages/widgets.html">
             <i class="fa fa-th"></i> <span>Destination</span>
@@ -122,6 +109,22 @@
             <li><a href="{{ route('itineraires.index') }}"><i class="fa fa-edit"></i> Itinéraire</a></li>
             <li><a href="{{ route('transports.index') }}">
             <i class="fa fa-edit"></i> Transport</a></li>
+
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="">
+            <i class="fa fa-edit"></i>
+            <span>Partenaire</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="">
+            <li><a href="{{ route('partenaires.index') }}"><i class="fa fa-edit"></i> Partenaire</a></li>
+            <li><a href="{{ route('certificats.index') }}"><i class="fa fa-files-o"></i> Certificat</a></li>
 
           </ul>
         </li>
