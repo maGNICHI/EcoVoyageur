@@ -38,7 +38,7 @@ class ItineraireController extends Controller
      */
     public function store(Request $request)
     {
-// Valider les données d'entrée
+
 $request->validate([
     'nom' => 'required|string|max:255',
     'description' => 'required|string',
