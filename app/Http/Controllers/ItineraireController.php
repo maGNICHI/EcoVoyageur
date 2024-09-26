@@ -27,7 +27,7 @@ class ItineraireController extends Controller
      */
     public function create()
     {
-        return view('create'); // Créez une vue 'create.blade.php' dans 'resources/views/itineraires'
+        return view('create');
     }
 
     /**
