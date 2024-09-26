@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Activite extends Model
 {
-    protected $fillable = ['title', 'content', 'image'];
-  
+    protected $fillable = [
+        'titre',
+        'contenu',
+        'image',
+    ];
+    use HasFactory;
 }
