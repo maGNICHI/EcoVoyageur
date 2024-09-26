@@ -25,17 +25,23 @@ class ActiviteController extends Controller
     {
         $request->validate([
             'titre' => 'required|string|max:255',
-            'contenu' => 'required',
-            'image' => 'nullable|string',
+            'contenu' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validation de l'image
         ]);
-
+    
+        $imageName = null;
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads'), $imageName); // Déplacement du fichier image dans le dossier 'uploads'
+        }
+    
         Activite::create([
             'titre' => $request->titre,
             'contenu' => $request->contenu,
-            'image' => $request->image,
+            'image' => $imageName, // Sauvegarde de l'URL de l'image
         ]);
-
-        return redirect()->route('activites.index')->with('success', 'Activité ajoutée avec succès.');
+    
+        return redirect()->route('activites.index')->with('success', 'Activité ajoutée avec succès');
     }
 
     // 4. Afficher une activité spécifique (Show)

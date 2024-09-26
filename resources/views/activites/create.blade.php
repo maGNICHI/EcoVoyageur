@@ -69,7 +69,7 @@
 
     <h1>Ajouter une Activité</h1>
 
-    <form action="{{ route('activites.store') }}" method="POST">
+    <form action="{{ route('activites.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div>
             <label for="titre">Titre :</label>
@@ -83,7 +83,7 @@
 
         <div>
             <label for="image">URL de l'image :</label>
-            <input type="text" id="image" name="image">
+            <input type="file" id="image" name="image">
         </div>
 
         <button type="submit">Ajouter</button>

@@ -66,10 +66,16 @@
         @foreach($activites as $activite)
             <div class="card">
                 <div class="card-header">
-                    <h2>{{ $activite->nom }}</h2>
+                    <h2>{{ $activite->titre }}</h2>
                 </div>
                 <div class="card-body">
-                    <p><strong>Description :</strong> {{ $activite->description }}</p>
+                    <p><strong>Description :</strong> {{ $activite->contenu }}</p>
+                    @if($activite->image)
+                    <div class="text-center mb-3">
+                        <img src="{{ asset('uploads/' . $activite->image) }}" class="img-fluid" width="300" alt="Image de l'activité">
+                    </div>
+                    @endif
+                  
                     <p><strong>Date :</strong> {{ $activite->date }}</p>
                     <p><strong>Durée :</strong> {{ $activite->duree }}</p>
                 </div>

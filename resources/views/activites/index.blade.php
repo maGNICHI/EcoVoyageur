@@ -63,7 +63,11 @@
                 <tr>
                     <td>{{ $item->titre }}</td>
                     <td>{{ $item->contenu }}</td>
-                    <td>{{ $item->image }}</td>
+                    @if($item->image)
+                    <td>
+                        <img src="{{ asset('uploads/' . $item->image) }}" class="img-fluid" width="300" alt="Image de l'activité">
+                    </td>
+                    @endif
                     <td>
                         <a href="{{ route('activites.edit', $item->id) }}" class="btn btn-warning">Modifier</a>
                         <form action="{{ route('activites.destroy', $item->id) }}" method="POST" style="display:inline;">
