@@ -96,7 +96,7 @@ return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succ�
             'duree' => 'required|string|max:255',
         ]);
 
-        // Mettre à jour l'itinéraire
+
         $itineraire->nom = $request->nom;
         $itineraire->description = $request->description;
         $itineraire->duree = $request->duree;
