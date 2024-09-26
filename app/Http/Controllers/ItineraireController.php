@@ -75,7 +75,7 @@ return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succ�
      */
     public function edit($id)
     {
-        $itineraire = Itineraire::findOrFail($id); // Trouver l'itinéraire par son ID
+        $itineraire = Itineraire::findOrFail($id);
         return view('edit', compact('itineraire')); // Retourner la vue avec l'itinéraire    }
     }
     /**
@@ -115,7 +115,7 @@ return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succ�
     public function destroy($id)
     {
         $itineraire = Itineraire::findOrFail($id);
-        $itineraire->delete(); // Supprimer l'itinéraire
+        $itineraire->delete();
 
         return redirect()->route('itineraires.index')->with('success', 'Itinéraire supprimé avec succès'); // Rediriger avec message
         }
