@@ -14,7 +14,7 @@ class ItineraireController extends Controller
      */
     public function index()
     {
-        // Récupère les itinéraires les plus récents en premier
+        
     $itineraire = Itineraire::orderBy('created_at', 'desc')->get();
 
     // Retourne la vue avec les itinéraires
