@@ -89,7 +89,7 @@ return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succ�
     {
         $itineraire = Itineraire::findOrFail($id);
 
-        // Valider les données du formulaire
+
         $request->validate([
             'nom' => 'required|string|max:255',
             'description' => 'required|string',
