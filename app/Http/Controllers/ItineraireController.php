@@ -52,7 +52,7 @@ Itineraire::create([
     'duree' => $request->duree,
 ]);
 
-// Rediriger vers la liste des itinéraires
+
 return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succès.');
     }
 
