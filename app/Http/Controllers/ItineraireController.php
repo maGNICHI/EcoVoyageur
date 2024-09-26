@@ -14,10 +14,10 @@ class ItineraireController extends Controller
      */
     public function index()
     {
-        
+
     $itineraire = Itineraire::orderBy('created_at', 'desc')->get();
 
-    // Retourne la vue avec les itinéraires
+
     return view('itineraires', compact('itineraire'));
     }
     /**
