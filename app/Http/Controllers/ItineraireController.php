@@ -87,7 +87,7 @@ return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succ�
      */
     public function update(Request $request, $id)
     {
-        $itineraire = Itineraire::findOrFail($id); // Trouver l'itinéraire par son ID
+        $itineraire = Itineraire::findOrFail($id);
 
         // Valider les données du formulaire
         $request->validate([
