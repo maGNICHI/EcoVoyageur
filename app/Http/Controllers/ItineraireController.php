@@ -76,7 +76,7 @@ return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succ�
     public function edit($id)
     {
         $itineraire = Itineraire::findOrFail($id);
-        return view('edit', compact('itineraire')); // Retourner la vue avec l'itinéraire    }
+        return view('edit', compact('itineraire'));
     }
     /**
      * Update the specified resource in storage.
