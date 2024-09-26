@@ -121,7 +121,7 @@ return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succ�
         }
         public function itineraireStem()
 {
-    // Récupère les itinéraires triés par date de création
+
     $itineraire = Itineraire::orderBy('created_at', 'desc')->get();
 
     // Retourne la vue 'itinerairestem_template' avec les données des itinéraires
