@@ -124,7 +124,7 @@ return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succ�
 
     $itineraire = Itineraire::orderBy('created_at', 'desc')->get();
 
-    // Retourne la vue 'itinerairestem_template' avec les données des itinéraires
+
     return view('itinerairestem', compact('itineraire'));
 }
 
