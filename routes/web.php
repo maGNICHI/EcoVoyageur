@@ -28,8 +28,7 @@ Route::get('/itinerairestem', [ItineraireController::class, 'itineraireStem'])->
 Route::get('/transportstem', [TransportController::class, 'transportStem'])->name('transportstem');
 
 
-
 Route::resource('activites', ActiviteController::class);
 Route::resource('avis', AvisController::class);
-Route::get('/activitestem', [ItineraireController::class, 'activiteStem'])->name('activitestem');
-Route::get('/avisstem', [TransportController::class, 'avisStem'])->name('avisstem');
+Route::get('/activitestem', [ActiviteController::class, 'activiteStem'])->name('activitestem');
+Route::get('/avisstem', [AvisController::class, 'avisStem'])->name('avisstem');
