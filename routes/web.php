@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItineraireController;
 use App\Http\Controllers\TransportController;
+use App\Http\Controllers\ActiviteController;
+use App\Http\Controllers\AvisController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,3 +27,9 @@ Route::resource('transports', TransportController::class);
 Route::get('/itinerairestem', [ItineraireController::class, 'itineraireStem'])->name('itinerairestem');
 Route::get('/transportstem', [TransportController::class, 'transportStem'])->name('transportstem');
 
+
+
+Route::resource('activites', ActiviteController::class);
+Route::resource('avis', AvisController::class);
+Route::get('/activitestem', [ItineraireController::class, 'activiteStem'])->name('activitestem');
+Route::get('/avisstem', [TransportController::class, 'avisStem'])->name('avisstem');
