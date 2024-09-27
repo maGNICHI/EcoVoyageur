@@ -78,7 +78,7 @@ class TransportController extends Controller
     {
         $transport = Transport::findOrFail($id);
         $itineraire = Itineraire::all();
-        return view('edittransport', compact('transport', 'itineraire')); // Passe le transport et les itinéraires à la vue
+        return view('edittransport', compact('transport', 'itineraire'));
     }
 
     /**
