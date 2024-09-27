@@ -41,7 +41,7 @@ class TransportController extends Controller
      */
     public function store(Request $request)
     {
-        // Validation des données
+
         $request->validate([
             'type' => 'required|string',
             'description' => 'nullable|string',
