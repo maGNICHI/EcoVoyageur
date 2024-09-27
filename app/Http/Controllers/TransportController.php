@@ -77,7 +77,7 @@ class TransportController extends Controller
     public function edit($id)
     {
         $transport = Transport::findOrFail($id);
-        $itineraire = Itineraire::all(); // Récupère tous les itinéraires pour le menu déroulant
+        $itineraire = Itineraire::all();
         return view('edittransport', compact('transport', 'itineraire')); // Passe le transport et les itinéraires à la vue
     }
 
