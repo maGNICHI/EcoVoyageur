@@ -49,7 +49,7 @@ class TransportController extends Controller
             'itineraire_id' => 'required|exists:itineraires,id',
         ]);
 
-        // Création du transport
+
         Transport::create($request->all());
 
         // Redirection vers la liste des transports
