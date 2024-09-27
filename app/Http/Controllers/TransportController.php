@@ -52,7 +52,7 @@ class TransportController extends Controller
 
         Transport::create($request->all());
 
-        // Redirection vers la liste des transports
+
         return redirect()->route('transports.index')->with('success', 'Transport ajouté avec succès !');
 
     }
