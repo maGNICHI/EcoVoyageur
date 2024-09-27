@@ -76,6 +76,7 @@ nav.main-nav ul.nav li a:hover {
                                     <li><a href="{{ route('transportstem') }}">Transport</a></li>
                                 </ul>
                             </li>
+                            <li><a href="{{ route('destinations.destination') }}">Destination</a></li>
                             <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li>
 
                         </ul>
