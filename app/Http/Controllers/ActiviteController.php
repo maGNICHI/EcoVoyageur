@@ -59,24 +59,46 @@ class ActiviteController extends Controller
     }
 
     // 6. Mettre à jour une activité (Update)
+   
     public function update(Request $request, $id)
-    {
-        $activite = Activite::findOrFail($id);
+{
+    // Valider les données du formulaire
+    $validatedData = $request->validate([
+        'nom' => 'required|string|max:255',
+        'description' => 'required|string',
+        'duree' => 'required|string|max:255',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Image facultative
+    ]);
 
-        $request->validate([
-            'titre' => 'required|string|max:255',
-            'contenu' => 'required',
-            'image' => 'nullable|string',
-        ]);
+    // Récupérer l'activité
+    $activite = Activite::findOrFail($id);
 
-        $activite->update([
-            'titre' => $request->titre,
-            'contenu' => $request->contenu,
-            'image' => $request->image,
-        ]);
+    // Gérer l'upload de la nouvelle image
+    if ($request->hasFile('image')) {
+        // Supprimer l'ancienne image si elle existe
+        if ($activite->image && file_exists(public_path('uploads/' . $activite->image))) {
+            unlink(public_path('uploads/' . $activite->image));
+        }
 
-        return redirect()->route('activites.index')->with('success', 'Activité mise à jour avec succès!');
+        // Upload de la nouvelle image
+        $file = $request->file('image');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $filename);
+
+        // Mettre à jour l'image de l'activité
+        $activite->image = $filename;
     }
+
+    // Mettre à jour les autres champs
+    $activite->nom = $request->input('nom');
+    $activite->description = $request->input('description');
+    $activite->duree = $request->input('duree');
+    
+    // Sauvegarder les modifications
+    $activite->save();
+
+    return redirect()->route('activites.index')->with('success', 'Activité modifiée avec succès');
+}
 
     // 7. Supprimer une activité (Delete)
     public function destroy($id)

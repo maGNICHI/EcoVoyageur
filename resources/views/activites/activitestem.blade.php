@@ -1,60 +1,104 @@
+
 <style>
-    .background-container {
-        background-color: #dfe7f2; /* Couleur de fond du conteneur */
-        margin: 0;
-        padding: 0;
-        min-height: 100vh; /* Pour s'assurer que le conteneur prend toute la hauteur de la page */
-    }
+   .background-container {
+    background-color: #dfe7f2;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
 
-    .card-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px; /* Espacement entre les cartes */
-    }
+.card-container {
+    display: flex;
+    flex-direction: column; /* Empile les cartes verticalement */
+    align-items: center; /* Centre les cartes horizontalement */
+    gap: 20px; /* Espacement entre les cartes */
+    padding: 20px;
+}
 
-    .card {
-        margin-left: 40px;
-        margin-top: 12px;
-        margin-bottom: 34px;
-        background-color: #f9f9f9; /* Couleur de fond de la carte */
-        border: 1px solid #ddd; /* Bordure de la carte */
-        border-radius: 8px; /* Coins arrondis */
-        padding: 20px; /* Espacement intérieur */
-        width: calc(33.33% - 20px); /* Largeur de la carte (3 par ligne) */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre de la carte */
-    }
+.timeline-body {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: calc(33.33% - 20px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-    .card-header {
-        margin-bottom: 15px; /* Espacement entre le titre et le corps */
-    }
+.timeline-body:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
 
-    .card-body {
-        margin-bottom: 15px; /* Espacement entre le corps et le pied de page */
-    }
+.timeline-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
 
-    .card-footer {
-        display: flex;
-        justify-content: space-between; /* Espacement entre les boutons */
-    }
+.timeline-header .userimage img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
 
-    .btn {
-        background-color: #007bff; /* Couleur de fond du bouton */
-        color: white; /* Couleur du texte du bouton */
-        padding: 10px 15px; /* Espacement intérieur du bouton */
-        border: none; /* Pas de bordure */
-        border-radius: 5px; /* Coins arrondis */
-        text-decoration: none; /* Pas de soulignement */
-        cursor: pointer; /* Curseur en forme de main */
-    }
+.username {
+    font-weight: bold;
+    font-size: 16px;
+}
 
-    .btn:hover {
-        background-color: #0056b3; /* Couleur de fond au survol */
-    }
-</style>
+.text-muted {
+    font-size: 12px;
+    color: #999;
+    margin-left: auto;
+}
 
+.timeline-content h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.timeline-content p {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.timeline-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.timeline-footer .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.timeline-footer .btn:hover {
+    background-color: #0056b3;
+}
+
+    </style>
 <div class="background-container">
 
-    @include('nav') {{-- Inclut votre fichier de navigation --}}
+    @include('nav') {{-- Inclure le fichier de navigation --}}
 
     <h1 style="margin-top: 100px; margin-left: 73px">Liste des Activités</h1>
 
@@ -64,36 +108,31 @@
 
     <div class="card-container">
         @foreach($activites as $activite)
-            <div class="card">
-                <div class="card-header">
-                    <h2>{{ $activite->titre }}</h2>
+            <div class="timeline-body card">
+                <div class="timeline-header card-header">
+                    <span class="userimage">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Avatar" class="user-avatar">
+                    </span>
+                    <span class="username">Créateur: Manar</span>
+                    <span class="text-muted">Créé le : {{ $activite->created_at->format('F j, Y, g:i a') }}</span>
                 </div>
-                <div class="card-body">
-                    <p><strong>Description :</strong> {{ $activite->contenu }}</p>
+                <div class="timeline-content card-body">
+                    <h4>{{ $activite->titre }}</h4>
+                    <p>{{ $activite->contenu }}</p>
                     @if($activite->image)
-                    <div class="text-center mb-3">
+                    <p>
                         <img src="{{ asset('uploads/' . $activite->image) }}" class="img-fluid" width="300" alt="Image de l'activité">
-                    </div>
+                    </p>
                     @endif
-                  
                     <p><strong>Date :</strong> {{ $activite->date }}</p>
                     <p><strong>Durée :</strong> {{ $activite->duree }}</p>
                 </div>
-                <!-- Optionnel : Si vous voulez inclure les boutons Modifier et Supprimer -->
-                <!--
-                <div class="card-footer">
-                    <a href="{{ route('activites.edit', $activite->id) }}" class="btn">Modifier</a>
-                    <form action="{{ route('activites.destroy', $activite->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn">Supprimer</button>
-                    </form>
+                <div class="timeline-footer card-footer">
+                    <a href="#" class="btn btn-primary">Voir plus</a>
                 </div>
-                -->
             </div>
         @endforeach
     </div>
 
-    @include('footer') {{-- Inclut votre fichier de pied de page --}}
-
+    @include('footer') {{-- Inclure le fichier de pied de page --}}
 </div>
