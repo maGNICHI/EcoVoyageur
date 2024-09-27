@@ -17,7 +17,7 @@ class TransportController extends Controller
     {
         $transports = Transport::with('itineraire')->orderBy('created_at', 'desc')->get();
 
-    // Retourne la vue avec les transports
+
     return view('transports', compact('transports')); // Passe les transports à la vue
  }
     /**
