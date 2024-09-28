@@ -124,11 +124,9 @@
                         <img src="{{ asset('uploads/' . $activite->image) }}" class="img-fluid" width="300" alt="Image de l'activité">
                     </p>
                     @endif
-                    <p><strong>Date :</strong> {{ $activite->date }}</p>
-                    <p><strong>Durée :</strong> {{ $activite->duree }}</p>
                 </div>
                 <div class="timeline-footer card-footer">
-                    <a href="#" class="btn btn-primary">Voir plus</a>
+                    <a href="{{ route('activites.show', $activite->id) }}" class="btn btn-primary">Voir plus</a>
                 </div>
             </div>
         @endforeach

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('avis', function (Blueprint $table) {
             $table->id();
             $table->text('contenu');
+            $table->foreignId('activite_id')->constrained()->onDelete('cascade'); // Relation avec les activités
             $table->timestamps();
         });
     }

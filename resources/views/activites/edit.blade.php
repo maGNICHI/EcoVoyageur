@@ -82,19 +82,16 @@
         @method('PUT')
 
         <div>
-            <label for="nom">Nom :</label>
-            <input type="text" id="nom" name="nom" value="{{ old('nom', $activite->nom) }}" required>
+            <label for="titre">titre :</label>
+            <input type="text" id="titre" name="titre" value="{{ old('titre', $activite->titre) }}" required>
         </div>
 
         <div>
-            <label for="description">Description :</label>
-            <textarea id="description" name="description" required>{{ old('description', $activite->description) }}</textarea>
+            <label for="contenu">Contenu :</label>
+            <textarea id="contenu" name="contenu" required>{{ old('contenu', $activite->contenu) }}</textarea>
         </div>
 
-        <div>
-            <label for="duree">Durée :</label>
-            <input type="text" id="duree" name="duree" value="{{ old('duree', $activite->duree) }}" required>
-        </div>
+        
 
         <!-- Section pour l'upload d'image -->
         <div>

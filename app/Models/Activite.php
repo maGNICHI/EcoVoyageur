@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activite extends Model
 {
-    protected $fillable = [
-        'titre',
-        'contenu',
-        'image',
-    ];
     use HasFactory;
+
+    protected $fillable = ['titre', 'contenu', 'image'];
+
+    public function avis()
+    {
+        return $this->hasMany(Avis::class);
+    }
+
 }

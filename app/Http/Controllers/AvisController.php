@@ -2,83 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activite;
+use App\Models\Avis;
 use Illuminate\Http\Request;
 
 class AvisController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
+        // 1. Enregistrer un nouvel avis
+        public function store(Request $request, $activiteId)
+        {
+            $request->validate([
+                'contenu' => 'required|string',
+            ]);
+    
+            $activite = Activite::findOrFail($activiteId);
+    
+            $avis = new Avis();
+            $avis->contenu = $request->contenu;
+            $avis->activite_id = $activite->id;
+            $avis->save();
+    
+            return redirect()->route('activites.show', $activite->id)->with('success', 'Avis ajouté avec succès');
+        }
+    
+        // 2. Supprimer un avis
+        public function destroy($id)
+        {
+            $avis = Avis::findOrFail($id);
+            $avis->delete();
+    
+            return redirect()->route('activites.show', $avis->activite_id)->with('success', 'Avis supprimé avec succès');
+        }
+    
+    
 }

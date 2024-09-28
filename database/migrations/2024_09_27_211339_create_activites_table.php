@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('activites', function (Blueprint $table) {
-            $table->id();
-            $table->string('titre');
-            $table->text('contenu');
-            $table->string('image')->nullable();
-            $table->timestamps();
+          $table->id();
+          $table->string('titre');
+          $table->text('contenu');
+          $table->string('image')->nullable(); // Peut être nullable si l'image n'est pas obligatoire
+          $table->timestamps();
         });
     }
 

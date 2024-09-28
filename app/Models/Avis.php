@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Avis extends Model
 {
-    protected $fillable = [
-        'contenu',
-    ];
     use HasFactory;
+
+    protected $fillable = ['activite_id', 'contenu'];
+
+    public function activite()
+    {
+        return $this->belongsTo(Activite::class);
+    }
 }

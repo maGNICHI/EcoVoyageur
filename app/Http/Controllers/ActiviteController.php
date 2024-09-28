@@ -47,11 +47,18 @@ class ActiviteController extends Controller
     // 4. Afficher une activité spécifique (Show)
     public function show($id)
     {
-        $activite = Activite::findOrFail($id);
+       // $activite = Activite::findOrFail($id);
+        $activite = Activite::with('avis')->findOrFail($id); 
         return view('activites.show', compact('activite'));
     }
 
     // 5. Afficher le formulaire d'édition d'une activité (Edit)
+     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
         $activite = Activite::findOrFail($id);
@@ -59,17 +66,21 @@ class ActiviteController extends Controller
     }
 
     // 6. Mettre à jour une activité (Update)
-   
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
 {
     // Valider les données du formulaire
-    $validatedData = $request->validate([
-        'nom' => 'required|string|max:255',
-        'description' => 'required|string',
-        'duree' => 'required|string|max:255',
+     $request->validate([
+        'titre' => 'required|string|max:255',
+        'contenu' => 'required|string',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Image facultative
     ]);
-
     // Récupérer l'activité
     $activite = Activite::findOrFail($id);
 
@@ -79,26 +90,24 @@ class ActiviteController extends Controller
         if ($activite->image && file_exists(public_path('uploads/' . $activite->image))) {
             unlink(public_path('uploads/' . $activite->image));
         }
-
         // Upload de la nouvelle image
         $file = $request->file('image');
         $filename = time() . '_' . $file->getClientOriginalName();
         $file->move(public_path('uploads'), $filename);
-
         // Mettre à jour l'image de l'activité
         $activite->image = $filename;
     }
-
     // Mettre à jour les autres champs
-    $activite->nom = $request->input('nom');
-    $activite->description = $request->input('description');
-    $activite->duree = $request->input('duree');
-    
+    $activite->titre = $request->input('titre');
+    $activite->contenu = $request->input('contenu');
     // Sauvegarder les modifications
     $activite->save();
-
     return redirect()->route('activites.index')->with('success', 'Activité modifiée avec succès');
+    
 }
+
+
+
 
     // 7. Supprimer une activité (Delete)
     public function destroy($id)
@@ -115,4 +124,5 @@ class ActiviteController extends Controller
         $activites = Activite::orderBy('created_at', 'desc')->get();
         return view('activites.activitestem', compact('activites'));
     }
+   
 }
