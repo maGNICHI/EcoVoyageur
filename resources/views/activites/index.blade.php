@@ -65,7 +65,7 @@
                     <td>{{ $item->contenu }}</td>
                     @if($item->image)
                     <td>
-                        <img src="{{ asset('uploads/' . $item->image) }}" class="img-fluid" width="300" alt="Image de l'activité">
+                        <img src="{{ asset('uploads/' . $item->image) }}" class="img-fluid" width="150" alt="Image de l'activité">
                     </td>
                     @endif
                     <td>

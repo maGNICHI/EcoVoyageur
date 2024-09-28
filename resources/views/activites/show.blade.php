@@ -62,7 +62,7 @@
 
     .timeline-content p {
         color: #555;
-        margin-bottom: 10px;
+        margin-top: 10px;
     }
 
     .timeline-content img {
@@ -94,12 +94,57 @@
     .timeline-footer .btn:hover {
         background-color: #0056b3;
     }
+
+    .timeline-comment-box {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-comment-box .user img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .timeline-comment-box .input {
+            flex-grow: 1;
+            margin-left: 10px;
+        }
+
+        .input-group {
+            display: flex;
+        }
+        .input-group input {
+            flex-grow: 1;
+            border-radius: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .input-group button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .input-group button:hover {
+            background-color: #0056b3;
+        }
+
+
+
+
 </style>
 
 <div class="background-container">
-    @include('nav') 
+    @include('nav')
 
-    <h1 class="text-center my-5">Liste des Activités</h1>
+    <h1 class="text-center my-5">Détails de l'Activité</h1>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -112,7 +157,7 @@
                 <span class="userimage">
                     <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Avatar" class="user-avatar">
                 </span>
-                <span class="username">Créateur: </span>
+                <span class="username">Manar </span>
                 <span class="text-muted">Créé le: {{ $activite->created_at->format('d/m/Y') }}</span>
             </div>
             <div class="timeline-content">
@@ -123,31 +168,45 @@
                 @endif
             </div>
         </div>
-
-        <h3>Avis</h3>
-        @if($activite->avis->isEmpty())
-            <p>Aucun avis pour cette activité.</p>
-        @else
-            @foreach($activite->avis as $avis)
-                <div class="timeline-body mb-3">
-                    <div class="timeline-content">
-                        <p>{{ $avis->contenu }}</p>
-                        <small>Posté le {{ $avis->created_at->format('d/m/Y') }}</small>
-                    </div>
-                </div>
-            @endforeach
-        @endif
-
-        <h3>Laisser un avis</h3>
-        <form action="{{ route('avis.store', $activite->id) }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="contenu">Votre avis :</label>
-                <textarea name="contenu" class="form-control" rows="4" required></textarea>
+        <div class="timeline-likes">
+            <div class="stats-right">
+                
+                <span class="stats-text">{{ $activite->avis()->count() }} Avis</span>
             </div>
-            <button type="submit" class="btn btn-primary mt-2">Soumettre</button>
+            
+        </div>
+        <div class="comment-section">
+            @foreach($activite->avis as $avis)
+            <div class="timeline-body">
+                <div class="timeline-header">
+                    <span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
+                    <span class="username">Manar</span>
+                    <span class="text-muted">{{ $avis->created_at->format('d/m/Y') }}</span>
+                </div>
+                <div class="timeline-content">
+                    <p>{{ $avis->contenu }}</p>
+                </div>
+             </div>
+            @endforeach
+        </div>
+                
+                
+        <div class="timeline-comment-box">
+           
+            
+        <div class="input">
+        <form action="{{ route('avis.store', ['activite' => $activite->id])  }}" method="POST">
+            @csrf
+            <input type="hidden" name="activite_id" value="{{ $activite->id }}">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Écrire votre avis..." name="contenu">
+                <button type="submit" class="btn btn-primary">Soumettre</button>
+            </div>
         </form>
+        </div>
     </div>
+    </div>
+</div>
 
-    @include('footer') 
+    @include('footer')
 </div>

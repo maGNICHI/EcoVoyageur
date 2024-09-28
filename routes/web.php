@@ -32,6 +32,7 @@ Route::resource('activites', ActiviteController::class);
 Route::resource('avis', AvisController::class);
 Route::get('/activitestem', [ActiviteController::class, 'activiteStem'])->name('activitestem');
 Route::get('/avisstem', [AvisController::class, 'avisStem'])->name('avisstem');
+Route::post('/avis/{activite}', [AvisController::class, 'store'])->name('avis.store');
 //Route::get('/activites/{id}', [ActiviteController::class, 'show'])->name('show');
 // Route for creating avis (reviews)
 //Route::post('activites/{activite}/avis', [AvisController::class, 'store'])->name('avis.store');
