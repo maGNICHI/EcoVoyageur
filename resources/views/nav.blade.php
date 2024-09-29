@@ -68,7 +68,8 @@ nav.main-nav ul.nav li a:hover {
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
                             <li class="scroll-to-section"><a href="#about">About</a></li>
-                            <li class="scroll-to-section"><a href="#projects">Projects</a></li>
+                            <li><a href="{{ route('activitestem') }}">Activites</a></li>
+                            
                             <li class="submenu">
                                 <a href="javascript:;">Deplacement</a>
                                 <ul>

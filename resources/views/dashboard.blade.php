@@ -145,12 +145,12 @@
           </a>
 
         </li>
-        <li class="treeview">
-          <a href="#">
+        
+        <li>
+          <a href="{{ route('activites.index') }}">
             <i class="fa fa-edit"></i> <span>Activite</span>
 
           </a>
-
         </li>
         <li class="treeview">
           <a href="#">

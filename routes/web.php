@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ActiviteController;
+use App\Http\Controllers\AvisController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
@@ -32,3 +34,9 @@ Route::get('/destinations', [DestinationController::class, 'index'])->name('dest
 Route::get('/destination', [DestinationController::class, 'destination'])->name('destinations.destination');
 
 Route::resource('events', EventController::class);
+Route::resource('activites', ActiviteController::class);
+Route::get('/activites/{id}', [ActiviteController::class, 'show'])->name('activite');
+Route::resource('avis', AvisController::class);
+Route::get('/activitestem', [ActiviteController::class, 'activiteStem'])->name('activitestem');
+Route::get('/avisstem', [AvisController::class, 'avisStem'])->name('avisstem');
+Route::post('/avis/{activite}', [AvisController::class, 'store'])->name('avis.store');
