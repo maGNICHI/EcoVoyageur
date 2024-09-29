@@ -24,8 +24,8 @@ class ActiviteController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titre' => 'required|string|max:255',
-            'contenu' => 'required|string',
+            'titre' => 'required|string|max:255|min:4',
+            'contenu' => 'required|string|min:20',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validation de l'image
         ]);
     

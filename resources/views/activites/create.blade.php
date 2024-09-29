@@ -72,13 +72,19 @@
     <form action="{{ route('activites.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div>
-            <label for="titre">Titre :</label>
-            <input type="text" id="titre" name="titre" required>
+            <label for="titre">Titre (max 255 caractères) :</label>
+            <input type="text" id="titre" name="titre" value="{{ old('titre') }}" required maxlength="255" minlength="5" placeholder="Entrez le titre de l'activité">
+            @error('titre')
+                <div class="error">{{ $message }}</div>
+            @enderror
         </div>
 
         <div>
-            <label for="contenu">Contenu :</label>
-            <textarea id="contenu" name="contenu" required></textarea>
+            <label for="contenu">Contenu (min 20 caractères) :</label>
+            <textarea id="contenu" name="contenu" required minlength="20" placeholder="Décrivez l'activité">{{ old('contenu') }}</textarea>
+            @error('contenu')
+                <div class="error">{{ $message }}</div>
+            @enderror
         </div>
 
         <div>
