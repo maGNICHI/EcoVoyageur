@@ -7,6 +7,9 @@ use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItineraireController;
 use App\Http\Controllers\TransportController;
+use App\Http\Controllers\PartenaireController;
+use App\Http\Controllers\CertificatController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,3 +43,9 @@ Route::resource('avis', AvisController::class);
 Route::get('/activitestem', [ActiviteController::class, 'activiteStem'])->name('activitestem');
 Route::get('/avisstem', [AvisController::class, 'avisStem'])->name('avisstem');
 Route::post('/avis/{activite}', [AvisController::class, 'store'])->name('avis.store');
+
+
+Route::resource('certificats', CertificatController::class); // Added certificat routes
+Route::resource('partenaires', PartenaireController::class);
+Route::get('/certificatstem', [CertificatController::class, 'certificatStem'])->name('certificatstem'); // Added certificat stem route
+Route::get('/partenaireStem', [PartenaireController::class, 'partenaireStem'])->name('partenaireStem'); // Added patenaire stem route
