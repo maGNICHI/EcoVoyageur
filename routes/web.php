@@ -35,6 +35,7 @@ Route::get('/transportstem', [TransportController::class, 'transportStem'])->nam
 Route::resource('destinations', DestinationController::class);
 Route::get('/destinations', [DestinationController::class, 'index'])->name('destinations.index');
 Route::get('/destination', [DestinationController::class, 'destination'])->name('destinations.destination');
+Route::get('/destinations/{id}', [ActiviteController::class, 'show'])->name('destination');
 
 Route::resource('events', EventController::class);
 Route::resource('activites', ActiviteController::class);

@@ -43,7 +43,12 @@ class DestinationController extends Controller
 
         return redirect()->route('destinations.index')->with('success', 'Destination ajoutée avec succès !');
     }
-
+    public function show($id)
+    {
+       
+        $destination = Destination::with('events')->findOrFail($id); 
+        return view('destinations.show', compact('destination'));
+    }
     /**
      * Affiche le formulaire pour modifier une destination.
      */

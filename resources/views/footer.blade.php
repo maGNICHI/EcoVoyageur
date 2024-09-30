@@ -32,7 +32,7 @@ https://templatemo.com/tm-543-breezed
             <div class="row">
                 <div class="col-lg-6 col-xs-12">
                     <div class="left-text-content">
-                        <p>Copyright &copy; 2020 Breezed Co., Ltd.
+                        <p>Copyright &copy; Coder's.
 
                         - Design: <a rel="nofollow noopener" href="https://templatemo.com">TemplateMo</a></p>
                     </div>
