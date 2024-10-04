@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItineraireController;
 use App\Http\Controllers\TransportController;
@@ -27,6 +29,11 @@ Route::resource('transports', TransportController::class);
 Route::get('/itinerairestem', [ItineraireController::class, 'itineraireStem'])->name('itinerairestem');
 Route::get('/transportstem', [TransportController::class, 'transportStem'])->name('transportstem');
 
+Route::resource('destinations', DestinationController::class);
+Route::get('/destinations', [DestinationController::class, 'index'])->name('destinations.index');
+Route::get('/destination', [DestinationController::class, 'destination'])->name('destinations.destination');
+
+Route::resource('events', EventController::class);
 
 Route::resource('activites', ActiviteController::class);
 Route::resource('avis', AvisController::class);

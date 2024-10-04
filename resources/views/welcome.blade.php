@@ -68,6 +68,7 @@ https://templatemo.com/tm-543-breezed
 
                                 </ul>
                             </li>
+                            <li><a href="{{ route('destinations.destination') }}">Destination</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Activites</a>
                                 <ul>

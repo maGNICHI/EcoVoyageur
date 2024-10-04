@@ -96,17 +96,21 @@
           </a>
 
         </li>
-        <li>
-          <a href="pages/widgets.html">
+        
+        <li><a href="{{ route('destinations.index') }}">
+        <i class="fa fa-edit"></i> Destination</a></li>
+          <!-- <a href="pages/widgets.html">
             <i class="fa fa-th"></i> <span>Destination</span>
-          </a>
-        </li>
+          </a> -->
+        
         <li class="treeview">
-          <a href="#">
+        <li><a href="{{ route('events.index') }}">
+        <i class="fa fa-edit"></i> Event</a></li>
+          <!-- <a href="#">
             <i class="fa fa-pie-chart"></i>
             <span>Event</span>
 
-          </a>
+          </a> -->
 
         </li>
         <li class="treeview">
