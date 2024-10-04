@@ -5,6 +5,8 @@ use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItineraireController;
 use App\Http\Controllers\TransportController;
+use App\Http\Controllers\ActiviteController;
+use App\Http\Controllers\AvisController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,3 +34,19 @@ Route::get('/destinations', [DestinationController::class, 'index'])->name('dest
 Route::get('/destination', [DestinationController::class, 'destination'])->name('destinations.destination');
 
 Route::resource('events', EventController::class);
+
+Route::resource('activites', ActiviteController::class);
+Route::resource('avis', AvisController::class);
+Route::get('/activitestem', [ActiviteController::class, 'activiteStem'])->name('activitestem');
+Route::get('/avisstem', [AvisController::class, 'avisStem'])->name('avisstem');
+Route::post('/avis/{activite}', [AvisController::class, 'store'])->name('avis.store');
+//Route::get('/activites/{id}', [ActiviteController::class, 'show'])->name('show');
+// Route for creating avis (reviews)
+//Route::post('activites/{activite}/avis', [AvisController::class, 'store'])->name('avis.store');
+
+// Route for deleting avis (reviews)
+//Route::delete('avis/{avis}', [AvisController::class, 'destroy'])->name('avis.destroy');
+
+//Route::get('/activites', [ActiviteController::class, 'index'])->name('activites.index');
+//Route::get('/activites/{id}', [ActiviteController::class, 'show'])->name('activites.show');
+//Route::post('/avis/{activiteId}', [AvisController::class, 'store'])->name('avis.store');

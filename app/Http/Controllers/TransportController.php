@@ -17,8 +17,8 @@ class TransportController extends Controller
     {
         $transports = Transport::with('itineraire')->orderBy('created_at', 'desc')->get();
 
-    // Retourne la vue avec les transports
-    return view('transports', compact('transports')); // Passe les transports à la vue
+
+    return view('transports', compact('transports'));
  }
     /**
      * Show the form for creating a new resource.
@@ -41,7 +41,7 @@ class TransportController extends Controller
      */
     public function store(Request $request)
     {
-        // Validation des données
+
         $request->validate([
             'type' => 'required|string',
             'description' => 'nullable|string',
@@ -49,10 +49,10 @@ class TransportController extends Controller
             'itineraire_id' => 'required|exists:itineraires,id',
         ]);
 
-        // Création du transport
+
         Transport::create($request->all());
 
-        // Redirection vers la liste des transports
+
         return redirect()->route('transports.index')->with('success', 'Transport ajouté avec succès !');
 
     }
@@ -76,9 +76,9 @@ class TransportController extends Controller
      */
     public function edit($id)
     {
-        $transport = Transport::findOrFail($id); // Récupère le transport par son ID
-        $itineraire = Itineraire::all(); // Récupère tous les itinéraires pour le menu déroulant
-        return view('edittransport', compact('transport', 'itineraire')); // Passe le transport et les itinéraires à la vue
+        $transport = Transport::findOrFail($id);
+        $itineraire = Itineraire::all();
+        return view('edittransport', compact('transport', 'itineraire'));
     }
 
     /**
