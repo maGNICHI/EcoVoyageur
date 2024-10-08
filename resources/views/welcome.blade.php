@@ -68,6 +68,11 @@ https://templatemo.com/tm-543-breezed
 
                                 </ul>
                             </li>
+                            <li class="submenu">
+                                <a href="javascript:;">Partenaire</a>
+                                <ul>
+                                    <li><a href="{{ route('partenaireStem') }}">Partenaire</a></li>
+                                    <li><a href="{{ route('certificatstem') }}">Certificat</a></li>
                             <li><a href="{{ route('destinations.destination') }}">Destination</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Activites</a>
