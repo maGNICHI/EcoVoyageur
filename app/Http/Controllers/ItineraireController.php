@@ -14,10 +14,10 @@ class ItineraireController extends Controller
      */
     public function index()
     {
-        // Récupère les itinéraires les plus récents en premier
+
     $itineraire = Itineraire::orderBy('created_at', 'desc')->get();
 
-    // Retourne la vue avec les itinéraires
+
     return view('itineraires', compact('itineraire'));
     }
     /**
@@ -27,7 +27,7 @@ class ItineraireController extends Controller
      */
     public function create()
     {
-        return view('create'); // Créez une vue 'create.blade.php' dans 'resources/views/itineraires'
+        return view('create');
     }
 
     /**
@@ -38,7 +38,7 @@ class ItineraireController extends Controller
      */
     public function store(Request $request)
     {
-// Valider les données d'entrée
+
 $request->validate([
     'nom' => 'required|string|max:255',
     'description' => 'required|string',
@@ -52,7 +52,7 @@ Itineraire::create([
     'duree' => $request->duree,
 ]);
 
-// Rediriger vers la liste des itinéraires
+
 return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succès.');
     }
 
@@ -75,8 +75,8 @@ return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succ�
      */
     public function edit($id)
     {
-        $itineraire = Itineraire::findOrFail($id); // Trouver l'itinéraire par son ID
-        return view('edit', compact('itineraire')); // Retourner la vue avec l'itinéraire    }
+        $itineraire = Itineraire::findOrFail($id);
+        return view('edit', compact('itineraire'));
     }
     /**
      * Update the specified resource in storage.
@@ -87,16 +87,16 @@ return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succ�
      */
     public function update(Request $request, $id)
     {
-        $itineraire = Itineraire::findOrFail($id); // Trouver l'itinéraire par son ID
+        $itineraire = Itineraire::findOrFail($id);
 
-        // Valider les données du formulaire
+
         $request->validate([
             'nom' => 'required|string|max:255',
             'description' => 'required|string',
             'duree' => 'required|string|max:255',
         ]);
 
-        // Mettre à jour l'itinéraire
+
         $itineraire->nom = $request->nom;
         $itineraire->description = $request->description;
         $itineraire->duree = $request->duree;
@@ -114,17 +114,17 @@ return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succ�
      */
     public function destroy($id)
     {
-        $itineraire = Itineraire::findOrFail($id); // Trouver l'itinéraire par son ID
-        $itineraire->delete(); // Supprimer l'itinéraire
+        $itineraire = Itineraire::findOrFail($id);
+        $itineraire->delete();
 
         return redirect()->route('itineraires.index')->with('success', 'Itinéraire supprimé avec succès'); // Rediriger avec message
         }
         public function itineraireStem()
 {
-    // Récupère les itinéraires triés par date de création
+
     $itineraire = Itineraire::orderBy('created_at', 'desc')->get();
 
-    // Retourne la vue 'itinerairestem_template' avec les données des itinéraires
+
     return view('itinerairestem', compact('itineraire'));
 }
 

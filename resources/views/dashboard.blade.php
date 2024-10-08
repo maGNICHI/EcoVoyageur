@@ -81,19 +81,43 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
 
+
       
       
         <li>
           <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Destination</span>
+
+      <li class="treeview">
+          <a href="#">
+            <i class="fa fa-edit"></i> <span>Paternaire</span>
+
           </a>
+
         </li>
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Certif</span>
+            </span>
+          </a>
+
+        </li>
+        
+        <li><a href="{{ route('destinations.index') }}">
+        <i class="fa fa-edit"></i> Destination</a></li>
+          <!-- <a href="pages/widgets.html">
+
+            <i class="fa fa-th"></i> <span>Destination</span>
+          </a> -->
+        
+        <li class="treeview">
+        <li><a href="{{ route('events.index') }}">
+        <i class="fa fa-edit"></i> Event</a></li>
+          <!-- <a href="#">
             <i class="fa fa-pie-chart"></i>
             <span>Event</span>
 
-          </a>
+          </a> -->
 
         </li>
         <li class="treeview">
@@ -145,11 +169,26 @@
 
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="{{ route('activites.index') }}">
             <i class="fa fa-edit"></i> <span>Activite</span>
 
           </a>
+        </li>
+        <li class="treeview">
+          <a href="">
+            <i class="fa fa-pie-chart"></i>
+            <span>Activite</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="">
+            <li><a href="{{ route('activites.index') }}"><i class="fa fa-edit"></i> Activite</a></li>
+            <li><a href="{{ route('avis.index') }}">
+            <i class="fa fa-edit"></i> avis</a></li>
 
+          </ul>
         </li>
         <li class="treeview">
           <a href="#">
