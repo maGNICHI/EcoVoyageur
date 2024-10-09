@@ -128,19 +128,8 @@
 
 
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Hebergement</span>
-
-          </a>
-
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Reclamation</span>
-
-          </a>
-
-        </li>
+        <li><a href="{{ route('reclamations.index1') }}"><i class="fa fa-edit"></i> reclamation </a></li>
+</li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-edit"></i> <span>Activite</span>

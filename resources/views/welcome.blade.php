@@ -68,6 +68,14 @@ https://templatemo.com/tm-543-breezed
 
                                 </ul>
                             </li>
+
+                            <li class="submenu">
+    <a href="javascript:;">Reclamation</a>
+    <ul>
+        <li><a href="{{ route('reclamations.create') }}">Ajouter une Réclamation</a></li>
+    </ul>
+</li>
+
                             <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li>
                             <div class="search-icon">
                                 <a href="#search"><i class="fa fa-search"></i></a>
@@ -320,7 +328,7 @@ Rejoignez-nous pour voyager autrement, en explorant le monde de manière respons
     <!-- ***** Testimonials Ends ***** -->
 
     <!-- ***** Contact Us Area Starts ***** -->
-    <section class="section" id="contact-us">
+   
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-12">
@@ -340,7 +348,7 @@ Rejoignez-nous pour voyager autrement, en explorant le monde de manière respons
                     <div class="contact-form">
                         <form id="contact" action="" method="get">
                           <div class="row">
-                            <div class="col-md-6 col-sm-12">
+                        <section class="section" id="contact-us">     <div class="col-md-6 col-sm-12">
                               <fieldset>
                                 <input name="name" type="text" id="name" placeholder="Votre nom *" required="">
                               </fieldset>

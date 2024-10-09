@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('itineraires', function (Blueprint $table) {
-            //
+        Schema::create('reclamations', function (Blueprint $table) {
+            $table->id();
+            $table->string('sujet'); 
+            $table->text('description');
+            #$table->string('duree');
+            $table->string('etat')->default('en attente'); 
+            $table->timestamps();
         });
     }
 
@@ -25,8 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('itineraires', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('reclamations');
     }
 };
