@@ -56,7 +56,7 @@
                     <td>{{ $reclamation->description }}</td>
                     <td>
                         <a href="{{ route('reclamations.show', $reclamation->id) }}" class="btn btn-info">Voir</a>
-                        <a href="{{ route('reclamations.edit', $reclamation->id) }}" class="btn btn-warning">Modifier</a>
+                      
                         <form action="{{ route('reclamations.destroy', $reclamation->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
