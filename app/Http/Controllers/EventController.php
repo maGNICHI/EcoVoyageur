@@ -61,15 +61,17 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+       /* $request->validate([
             'nom' => 'required|string|max:255',
             'description' => 'nullable|string',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after_or_equal:date_debut',
             'destination_id' => 'required|exists:destinations,id',
-        ]);
+        ]);*/
 
         $event = Event::findOrFail($id);
+        var_dump($event) ; 
+        die() ; 
         $event->update($request->all());
 
         return redirect()->route('events.index')->with('success', 'Événement mis à jour avec succès !');
