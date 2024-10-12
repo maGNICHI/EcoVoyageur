@@ -10,8 +10,6 @@ use App\Http\Controllers\TransportController;
 use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\CertificatController;
 
-use App\Http\Controllers\ActiviteController;
-use App\Http\Controllers\AvisController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,8 +40,6 @@ Route::get('/destinations/{id}', [ActiviteController::class, 'show'])->name('des
 Route::resource('events', EventController::class);
 Route::resource('activites', ActiviteController::class);
 Route::get('/activites/{id}', [ActiviteController::class, 'show'])->name('activite');
-
-Route::resource('activites', ActiviteController::class);
 Route::resource('avis', AvisController::class);
 Route::get('/activitestem', [ActiviteController::class, 'activiteStem'])->name('activitestem');
 Route::get('/avisstem', [AvisController::class, 'avisStem'])->name('avisstem');
@@ -54,13 +50,3 @@ Route::resource('certificats', CertificatController::class); // Added certificat
 Route::resource('partenaires', PartenaireController::class);
 Route::get('/certificatstem', [CertificatController::class, 'certificatStem'])->name('certificatstem'); // Added certificat stem route
 Route::get('/partenaireStem', [PartenaireController::class, 'partenaireStem'])->name('partenaireStem'); // Added patenaire stem route
-//Route::get('/activites/{id}', [ActiviteController::class, 'show'])->name('show');
-// Route for creating avis (reviews)
-//Route::post('activites/{activite}/avis', [AvisController::class, 'store'])->name('avis.store');
-
-// Route for deleting avis (reviews)
-//Route::delete('avis/{avis}', [AvisController::class, 'destroy'])->name('avis.destroy');
-
-//Route::get('/activites', [ActiviteController::class, 'index'])->name('activites.index');
-//Route::get('/activites/{id}', [ActiviteController::class, 'show'])->name('activites.show');
-//Route::post('/avis/{activiteId}', [AvisController::class, 'store'])->name('avis.store');

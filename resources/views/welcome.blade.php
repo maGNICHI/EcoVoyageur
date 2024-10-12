@@ -75,11 +75,6 @@ https://templatemo.com/tm-543-breezed
                                     <li><a href="{{ route('partenaireStem') }}">Partenaire</a></li>
                                     <li><a href="{{ route('certificatstem') }}">Certificat</a></li>
 
-                            <li class="submenu">
-                                <a href="javascript:;">Activites</a>
-                                <ul>
-                                    <li><a href="{{ route('activitestem') }}">Activite</a></li>
-                                    <li><a href="{{ route('avisstem') }}">Avis</a></li>
                                 </ul>
                             </li>
                             <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li>
