@@ -15,4 +15,5 @@ class Activite extends Model
     {
         return $this->hasMany(Avis::class);
     }
+
 }
