@@ -119,10 +119,23 @@ class ActiviteController extends Controller
     }
 
     // 8. Afficher les activités triées (Stem)
-    public function activiteStem()
+    public function activiteStem(Request $request)
     {
-        $activites = Activite::orderBy('created_at', 'desc')->get();
-        return view('activites.activitestem', compact('activites'));
+        //$activites = Activite::orderBy('created_at', 'desc')->get();
+       // return view('activites.activitestem', compact('activites'));
+
+       $search = $request->input('search');
+
+       // Si un terme de recherche est fourni, filtrer les activités par titre
+       if ($search) {
+           $activites = Activite::where('titre', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->get();
+       } else {
+           // Si aucun terme de recherche, récupérer toutes les activités
+           $activites = Activite::orderBy('created_at', 'desc')->get();
+       }
+   
+       // Retourner la vue du template avec les activités et le terme de recherche
+       return view('activites.activitestem', compact('activites', 'search'));
     }
    
 }
