@@ -58,6 +58,7 @@
                 <th>Titre</th>
                 <th>Contenu</th>
                 <th>Image</th>
+                <th>Nbr Avis</th>
                 <th>Actions</th> <!-- Colonne pour les actions -->
             </tr>
         </thead>
@@ -71,6 +72,7 @@
                         <img src="{{ asset('uploads/' . $item->image) }}" class="img-fluid" width="150" alt="Image de l'activité">
                     </td>
                     @endif
+                    <td>{{ $item->avis()->count() }}</td>
                     <td>
                         <a href="{{ route('activites.show', $item->id) }}" class="btn btn-info">Détails</a>
                         <a href="{{ route('activites.edit', $item->id) }}" class="btn btn-warning">Modifier</a>
