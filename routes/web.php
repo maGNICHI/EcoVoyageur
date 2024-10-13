@@ -46,6 +46,8 @@ Route::get('/avisstem', [AvisController::class, 'avisStem'])->name('avisstem');
 Route::post('/avis/{activite}', [AvisController::class, 'store'])->name('avis.store');
 
 
+Route::delete('/avis/{avis}', [AvisController::class, 'destroy'])->name('avis.destroy');
+
 Route::resource('certificats', CertificatController::class); // Added certificat routes
 Route::resource('partenaires', PartenaireController::class);
 Route::get('/certificatstem', [CertificatController::class, 'certificatStem'])->name('certificatstem'); // Added certificat stem route

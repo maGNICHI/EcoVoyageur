@@ -26,39 +26,32 @@ class ActiviteController extends Controller
         $request->validate([
             'titre' => 'required|string|max:255|min:4',
             'contenu' => 'required|string|min:20',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validation de l'image
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-    
+
         $imageName = null;
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads'), $imageName); // Déplacement du fichier image dans le dossier 'uploads'
+            $request->image->move(public_path('uploads'), $imageName);
         }
-    
+
         Activite::create([
             'titre' => $request->titre,
             'contenu' => $request->contenu,
-            'image' => $imageName, // Sauvegarde de l'URL de l'image
+            'image' => $imageName,
         ]);
-    
+
         return redirect()->route('activites.index')->with('success', 'Activité ajoutée avec succès');
     }
 
     // 4. Afficher une activité spécifique (Show)
     public function show($id)
     {
-       // $activite = Activite::findOrFail($id);
-        $activite = Activite::with('avis')->findOrFail($id); 
+        $activite = Activite::with('avis')->findOrFail($id);
         return view('activites.show', compact('activite'));
     }
 
     // 5. Afficher le formulaire d'édition d'une activité (Edit)
-     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $activite = Activite::findOrFail($id);
@@ -66,48 +59,34 @@ class ActiviteController extends Controller
     }
 
     // 6. Mettre à jour une activité (Update)
-     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
-{
-    // Valider les données du formulaire
-     $request->validate([
-        'titre' => 'required|string|max:255',
-        'contenu' => 'required|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Image facultative
-    ]);
-    // Récupérer l'activité
-    $activite = Activite::findOrFail($id);
+    {
+        $request->validate([
+            'titre' => 'required|string|max:255',
+            'contenu' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    // Gérer l'upload de la nouvelle image
-    if ($request->hasFile('image')) {
-        // Supprimer l'ancienne image si elle existe
-        if ($activite->image && file_exists(public_path('uploads/' . $activite->image))) {
-            unlink(public_path('uploads/' . $activite->image));
+        $activite = Activite::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            // Supprimer l'ancienne image si elle existe
+            if ($activite->image && file_exists(public_path('uploads/' . $activite->image))) {
+                unlink(public_path('uploads/' . $activite->image));
+            }
+            // Upload de la nouvelle image
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $filename);
+            $activite->image = $filename;
         }
-        // Upload de la nouvelle image
-        $file = $request->file('image');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $file->move(public_path('uploads'), $filename);
-        // Mettre à jour l'image de l'activité
-        $activite->image = $filename;
+
+        $activite->titre = $request->input('titre');
+        $activite->contenu = $request->input('contenu');
+        $activite->save();
+
+        return redirect()->route('activites.index')->with('success', 'Activité modifiée avec succès');
     }
-    // Mettre à jour les autres champs
-    $activite->titre = $request->input('titre');
-    $activite->contenu = $request->input('contenu');
-    // Sauvegarder les modifications
-    $activite->save();
-    return redirect()->route('activites.index')->with('success', 'Activité modifiée avec succès');
-    
-}
-
-
-
 
     // 7. Supprimer une activité (Delete)
     public function destroy($id)
@@ -121,21 +100,14 @@ class ActiviteController extends Controller
     // 8. Afficher les activités triées (Stem)
     public function activiteStem(Request $request)
     {
-        //$activites = Activite::orderBy('created_at', 'desc')->get();
-       // return view('activites.activitestem', compact('activites'));
+        $search = $request->input('search');
 
-       $search = $request->input('search');
+        if ($search) {
+            $activites = Activite::where('titre', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->get();
+        } else {
+            $activites = Activite::orderBy('created_at', 'desc')->get();
+        }
 
-       // Si un terme de recherche est fourni, filtrer les activités par titre
-       if ($search) {
-           $activites = Activite::where('titre', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->get();
-       } else {
-           // Si aucun terme de recherche, récupérer toutes les activités
-           $activites = Activite::orderBy('created_at', 'desc')->get();
-       }
-   
-       // Retourner la vue du template avec les activités et le terme de recherche
-       return view('activites.activitestem', compact('activites', 'search'));
+        return view('activites.activitestem', compact('activites', 'search'));
     }
-   
 }
