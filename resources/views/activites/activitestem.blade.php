@@ -228,7 +228,7 @@
                                 @csrf
                                 <input type="hidden" name="activite_id" value="{{ $activite->id }}">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Écrire votre avis..." name="contenu">
+                                    <input type="text" class="form-control" placeholder="Écrire votre avis..." name="contenu" required>
                                     <button type="submit" class="btn btn-primary">Soumettre</button>
                                 </div>
                             </form>
