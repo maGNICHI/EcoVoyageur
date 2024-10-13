@@ -10,8 +10,17 @@ class ActiviteController extends Controller
     // 1. Afficher la liste des activités (Read)
     public function index()
     {
-        $activites = Activite::orderBy('created_at', 'desc')->get();
-        return view('activites.index', compact('activites'));
+         // Récupérer toutes les activités
+    $activites = Activite::orderBy('created_at', 'desc')->get();
+
+    // Calculer le nombre d'activités par heure
+    $activitiesPerHour = Activite::selectRaw('HOUR(created_at) as hour, COUNT(*) as count')
+        ->groupBy('hour')
+        ->orderBy('hour')
+        ->get();
+
+    // Renvoyer les données à la vue
+    return view('activites.index', compact('activites', 'activitiesPerHour'));
     }
 
     // 2. Afficher le formulaire de création d'une nouvelle activité (Create)
