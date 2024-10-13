@@ -44,6 +44,9 @@
         .btn:hover {
             opacity: 0.9; /* Slightly decrease opacity on hover */
         }
+        .btn-info {
+    background-color: #17a2b8; /* Couleur bleue pour le bouton Détails */
+}
     </style>
 
     <h1>Liste des Activités</h1>
@@ -69,6 +72,7 @@
                     </td>
                     @endif
                     <td>
+                        <a href="{{ route('activites.show', $item->id) }}" class="btn btn-info">Détails</a>
                         <a href="{{ route('activites.edit', $item->id) }}" class="btn btn-warning">Modifier</a>
                         <form action="{{ route('activites.destroy', $item->id) }}" method="POST" style="display:inline;">
                             @csrf
