@@ -66,9 +66,10 @@ nav.main-nav ul.nav li a:hover {
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="#about">About</a></li>
-                            <li class="scroll-to-section"><a href="#projects">Projects</a></li>
+                        <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                        <li class="scroll-to-section"><a href="#about">About</a></li>
+                            <li><a href="{{ route('activitestem') }}">Activites</a></li>
+                            
                             <li class="submenu">
                                 <a href="javascript:;">Deplacement</a>
                                 <ul>
@@ -76,17 +77,13 @@ nav.main-nav ul.nav li a:hover {
                                     <li><a href="{{ route('transportstem') }}">Transport</a></li>
                                 </ul>
                             </li>
+                            <li><a href="{{ route('destinations.destination') }}">Destination</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Partenaire</a>
                                 <ul>
                                     <li><a href="{{ route('partenaireStem') }}">Partenaire</a></li>
                                     <li><a href="{{ route('certificatstem') }}">Certificat</a></li>
-                            <li><a href="{{ route('destinations.destination') }}">Destination</a></li>
-                            <li class="submenu">
-                                <a href="javascript:;">Activites</a>
-                                <ul>
-                                    <li><a href="{{ route('activitestem') }}">Activite</a></li>
-                                    <li><a href="{{ route('avisstem') }}">Avis</a></li>
+
                                 </ul>
                             </li>
                             <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li>
