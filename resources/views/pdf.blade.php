@@ -3,7 +3,7 @@
 <head>
     <title>Détails du Transport</title>
     <style>
-        /* Ajoutez ici les styles personnalisés pour le PDF */
+       
         body {
             font-family: 'DejaVu Sans', sans-serif;
         }
