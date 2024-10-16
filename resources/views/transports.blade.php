@@ -33,7 +33,7 @@
         }
 
         .btn:hover {
-            background-color: #0056b3; 
+            background-color: #0056b3;
         }
 
         .btn-primary {
@@ -46,8 +46,8 @@
         }
 
         .btn-warning:hover {
-            background-color: #e0a800; /* Couleur au survol pour le bouton Modifier */
-            color: black; /* Maintenir la couleur du texte */
+            background-color: #e0a800;
+            color: black; 
         }
 
         .btn-danger {
