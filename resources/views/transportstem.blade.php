@@ -169,7 +169,7 @@ form .btn-retour:hover {
 
         @else
         <p><strong>Itinéraire :</strong> Aucun itinéraire associé</p>
-    @endif <!-- Ajoutez cette ligne -->
+    @endif 
 
                 </div>
                 <!-- Vous pouvez décommenter la section ci-dessous pour ajouter des boutons Modifier et Supprimer -->
