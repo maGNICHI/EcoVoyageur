@@ -161,7 +161,7 @@ form .btn-retour:hover {
                     <p><strong>Description :</strong> {{ $transport->description }}</p>
                     <p><strong>Capacité :</strong> {{ $transport->capacite }}</p>
                     @if($transport->itineraire)
-        <p><strong>Itinéraire :</strong> {{ $transport->itineraire->nom }}</p> <!-- Affiche le nom de l'itinéraire -->
+        <p><strong>Itinéraire :</strong> {{ $transport->itineraire->nom }}</p>
         <div class="card-footer">
         <a href="{{ route('transports.download-pdf', $transport->id) }}" class="btn">Télécharger PDF</a>
         </div>
