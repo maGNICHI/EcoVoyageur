@@ -9,7 +9,7 @@ class Event extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'description', 'date_debut', 'date_fin', 'destination_id'];
+    protected $fillable = ['nom', 'description', 'date_debut', 'date_fin', 'destination_id', 'image'];
 
     // Relation avec la destination
     public function destination()

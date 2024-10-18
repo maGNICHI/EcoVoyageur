@@ -22,4 +22,9 @@ class Destination extends Model
     {
         return ['plage', 'montagne', 'ville', 'campagne'];
     }
+      // Relation avec les itinéraires
+      public function itineraires()
+      {
+          return $this->hasMany(Itineraire::class);
+      }
 }

@@ -29,7 +29,6 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
-        // Validation des données
         $request->validate([
             'nom' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -38,17 +37,20 @@ class DestinationController extends Controller
             'longitude' => 'required|numeric',
         ]);
 
-        // Création de la destination
         Destination::create($request->all());
 
         return redirect()->route('destinations.index')->with('success', 'Destination ajoutée avec succès !');
     }
+
+    /**
+     * Affiche les détails d'une destination.
+     */
     public function show($id)
     {
-       
-        $destination = Destination::with('events')->findOrFail($id); 
+        $destination = Destination::with('events')->findOrFail($id);
         return view('destinations.show', compact('destination'));
     }
+
     /**
      * Affiche le formulaire pour modifier une destination.
      */
@@ -87,10 +89,13 @@ class DestinationController extends Controller
 
         return redirect()->route('destinations.index')->with('success', 'Destination supprimée avec succès !');
     }
-     public function destination()
+
+    /**
+     * Retourne la liste des destinations pour une vue.
+     */
+    public function destination()
     {
         $destinations = Destination::all();
-    return view('destinations.destination', compact('destinations'));
-    
-     }
+        return view('destinations.destination', compact('destinations'));
+    }
 }

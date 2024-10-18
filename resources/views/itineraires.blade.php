@@ -32,7 +32,8 @@
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Durée</th>
-                <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
+                <th>Destination</th> <!-- Nouvelle colonne pour la destination -->
+                <th>Actions</th> <!-- Colonne pour les actions -->
             </tr>
         </thead>
         <tbody>
@@ -41,6 +42,7 @@
                     <td>{{ $item->nom }}</td>
                     <td>{{ $item->description }}</td>
                     <td>{{ $item->duree }}</td>
+                    <td>{{ $item->destination->nom }}
                     <td>
                         <a href="{{ route('itineraires.edit', $item->id) }}" class="btn btn-warning">Modifier</a>
                         <form action="{{ route('itineraires.destroy', $item->id) }}" method="POST" style="display:inline;">

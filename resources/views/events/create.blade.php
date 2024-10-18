@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <form action="{{ route('events.store') }}" method="POST">
+    <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group">
@@ -54,7 +54,10 @@
             <input type="date" name="date_fin" id="date_fin" class="form-control" value="{{ old('date_fin') }}" required>
         </div>
 
-      
+        <div>
+            <label for="image">URL de l'image :</label>
+            <input type="file" id="image" name="image">
+        </div>
 
         <button type="submit" class="btn btn-primary">Créer</button>
         <a href="{{ route('events.index') }}" class="btn btn-secondary">Retour</a>

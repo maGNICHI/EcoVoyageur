@@ -19,8 +19,8 @@ return new class extends Migration
             $table->text('description');
             $table->date('date_debut');
             $table->date('date_fin');
-            $table->unsignedBigInteger('destination_id'); // Clé étrangère pour destination_id
-            $table->foreign('destination_id')->references('id')->on('destinations'); // Définition de la clé étrangère
+            $table->string('image')->nullable();
+            $table->foreignId('destination_id')->constrained('destinations')->onDelete('cascade'); // Définition de la clé étrangère
             $table->timestamps();
         });
     }

@@ -90,7 +90,18 @@
             <label for="duree">Durée :</label>
             <input type="text" id="duree" name="duree" value="{{ old('duree', $itineraire->duree) }}" required>
         </div>
-
+        <div>
+            <label for="destination_id">Destination :</label>
+            <select id="destination_id" name="destination_id" required>
+                <option value="">Sélectionner une destination</option>
+                @foreach($destinations as $destination)
+                    <option value="{{ $destination->id }}" 
+                        {{ $itineraire->destination_id == $destination->id ? 'selected' : '' }}>
+                        {{ $destination->nom }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit">Modifier</button>
         <a href="{{ route('itineraires.index') }}" class="btn-retour">Retour</a>
 

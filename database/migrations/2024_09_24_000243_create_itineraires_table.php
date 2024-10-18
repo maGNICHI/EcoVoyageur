@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->text('description');
-            #$table->string('duree');
             $table->integer('duree');
+            $table->foreignId('destination_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
