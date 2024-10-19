@@ -23,4 +23,11 @@ class Activite extends Model
         return $this->belongsToMany(User::class, 'activite_likes', 'activite_id', 'user_id');
     }
 
+    // Méthode pour vérifier si l'utilisateur a déjà liké l'activité
+    public function isLikedBy(User $user)
+    {
+        return $this->likes()->where('user_id', $user->id)->exists();
+    }
+    
+
 }

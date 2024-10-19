@@ -121,16 +121,26 @@ class ActiviteController extends Controller
         return view('activites.activitestem', compact('activites', 'search'));
     }
     public function like($id)
-{
-    $activite = Activite::findOrFail($id);
-    $activite->likes()->attach(auth()->id());
-    return redirect()->back()->with('success', 'Vous avez aimé cette activité.');
-}
-
-public function unlike($id)
-{
-    $activite = Activite::findOrFail($id);
-    $activite->likes()->detach(auth()->id());
-    return redirect()->back()->with('success', 'Vous n\'aimez plus cette activité.');
-}
+    {
+        $activite = Activite::findOrFail($id);
+    
+        // Vérifie si l'utilisateur a déjà liké
+        if (!$activite->isLikedBy(auth()->user())) {
+            $activite->likes()->attach(auth()->id());
+        }
+    
+        return redirect()->back()->with('success', 'Vous avez aimé cette activité.');
+    }
+    
+    public function unlike($id)
+    {
+        $activite = Activite::findOrFail($id);
+    
+        // Vérifie si l'utilisateur a déjà liké
+        if ($activite->isLikedBy(auth()->user())) {
+            $activite->likes()->detach(auth()->id());
+        }
+    
+        return redirect()->back()->with('success', 'Vous n\'aimez plus cette activité.');
+    }
 }

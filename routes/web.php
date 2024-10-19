@@ -62,6 +62,8 @@ Route::get('/activitestem', [ActiviteController::class, 'activiteStem'])->name('
 Route::get('/avisstem', [AvisController::class, 'avisStem'])->name('avisstem');
 Route::post('/avis/{activite}', [AvisController::class, 'store'])->name('avis.store');
 
+Route::post('activites/{id}/like', [ActiviteController::class, 'like'])->name('activites.like');
+Route::post('activites/{id}/unlike', [ActiviteController::class, 'unlike'])->name('activites.unlike');
 
 Route::delete('/avis/{avis}', [AvisController::class, 'destroy'])->name('avis.destroy');
 

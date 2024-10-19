@@ -189,8 +189,29 @@
 
                 {{-- Réactions et statistiques --}}
                 <div class="timeline-footer">
-                    <span class="stats-text">{{  $activite->avis()->count()}} Avis</span>
+                    <div class="reaction-section">
+                        <form action="{{ route('activites.like', $activite->id) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @if($activite->isLikedBy(auth()->user()))
+                                <button type="submit" style="background: none; border: none; cursor: pointer; display: flex; align-items: center;">
+                                    <i class="fa fa-thumbs-down fa-fw fa-lg" style="margin-right: 5px;"></i>
+                                    <span>Dislike</span>
+                                </button>
+                            @else
+                                <button type="submit" style="background: none; border: none; cursor: pointer; display: flex; align-items: center;">
+                                    <i class="fa fa-thumbs-up fa-fw fa-lg" style="margin-right: 5px;"></i>
+                                    <span>Like</span>
+                                </button>
+                            @endif
+                        </form>
+                    </div>
+                    
+                    <div class="stats-section" style="margin-left: auto;">
+                        <span class="stats-text">{{ $activite->avis()->count() }} Avis</span>
+                        <span class="stats-text">{{ $activite->likes()->count() }} Like(s)</span>
+                    </div>
                 </div>
+                
 
                 {{-- Bouton pour afficher/masquer les avis --}}
                 <span class="toggle-avis" onclick="toggleAvis(this)">Afficher les avis</span>
