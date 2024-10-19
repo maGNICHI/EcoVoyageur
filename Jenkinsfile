@@ -1,8 +1,6 @@
 pipeline {
-    agent {
-        label 'vagrant' // Vous pouvez changer cela si vous avez un label spécifique pour la machine Jenkins
-    }
-
+    agent any  // Utilise n'importe quel agent disponible
+    
     environment {
         GIT_REPO_URL = 'https://github.com/maGNICHI/EcoVoyageur.git'
         GIT_BRANCH = 'Destination+Event'
@@ -26,7 +24,6 @@ pipeline {
 
         stage('Setup Environment') {
             steps {
-                // Copier un fichier .env pour Laravel et générer la clé d'application
                 sh 'cp .env.example .env'
                 sh 'php artisan key:generate'
             }
@@ -34,14 +31,12 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                // Exécuter les tests Laravel (avec PHPUnit)
                 sh 'php artisan test'
             }
         }
 
         stage('Deploy') {
             steps {
-                // Mettre en place votre script de déploiement si nécessaire
                 echo 'Déploiement réussi!'
             }
         }
