@@ -1,6 +1,6 @@
 pipeline {
     agent any  // Utilise n'importe quel agent disponible
-    
+
     environment {
         GIT_REPO_URL = 'https://github.com/maGNICHI/EcoVoyageur.git'
         GIT_BRANCH = 'Destination+Event'
@@ -9,8 +9,8 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                // Clone the specified branch from your GitHub repository
-                git branch: "${env.GIT_BRANCH}", url: "${env.GIT_REPO_URL}"
+                // Clone the specified branch from your GitHub repository using credentials
+                git branch: "${env.GIT_BRANCH}", url: "${env.GIT_REPO_URL}", credentialsId: '123456'
             }
         }
 
