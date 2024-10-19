@@ -173,7 +173,8 @@
                     <span class="userimage">
                         <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Avatar" class="user-avatar">
                     </span>
-                    <span class="username">Créateur: Manar</span>
+                    <span class="username"> admin</span>
+                   <!-- <span class="username"> {{$activite->user->name}}</span>-->
                     <span class="text-muted">Créé le : {{ $activite->created_at->format('F j, Y, g:i a') }}</span>
                 </div>
                 <div class="timeline-content">
@@ -200,7 +201,7 @@
                         <div class="timeline-comment-box">
                             <div class="timeline-header">
                                 <span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
-                                <span class="username">Utilisateur</span>
+                                <span class="username">{{$avis->user->name}}</span>
                                 <span class="text-muted">{{ $avis->created_at->format('d/m/Y') }}</span>
                                 <span class="delete-icon">
                                     <form action="{{ route('avis.destroy', $avis->id) }}" method="POST" style="display: inline;">

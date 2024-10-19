@@ -9,7 +9,11 @@ class Avis extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['activite_id', 'contenu'];
+    protected $fillable = ['activite_id', 'contenu', 'user_id'];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function activite()
     {

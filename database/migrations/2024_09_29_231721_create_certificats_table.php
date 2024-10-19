@@ -20,9 +20,8 @@ return new class extends Migration
             $table->string('organisme_emetteur'); // Issuing organization
             $table->date('date_attribution'); // Date of attribution
             $table->date('date_expiration')->nullable(); // Expiration date (nullable)
-            $table->unsignedBigInteger('partenaire_id'); // Foreign key for partenaire
-            $table->foreign('partenaire_id')->references('id')->on('partenaires')->onDelete('cascade'); // Relationship to partenaire
-            $table->timestamps(); // Timestamps (created_at and updated_at)
+            $table->foreignId('partenaire_id')->constrained('partenaires')->onDelete('cascade');
+             $table->timestamps(); // Timestamps (created_at and updated_at)
         });
     }
 

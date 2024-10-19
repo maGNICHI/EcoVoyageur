@@ -18,7 +18,18 @@ return new class extends Migration
             $table->string('titre');
             $table->text('contenu');
             $table->string('image')->nullable(); // Peut être nullable si l'image n'est pas obligatoire
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
+        });
+        Schema::create('activite_likes', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('activite_id');
+            $table->unsignedBigInteger('user_id');
+            $table->timestamps();
+    
+            $table->foreign('activite_id')->references('id')->on('activites')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -29,6 +40,7 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('activite_likes');
         Schema::dropIfExists('activites');
     }
 };
