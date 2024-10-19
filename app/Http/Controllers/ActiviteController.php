@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activite;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ActiviteController extends Controller
@@ -123,24 +124,22 @@ class ActiviteController extends Controller
     public function like($id)
     {
         $activite = Activite::findOrFail($id);
-    
-        // Vérifie si l'utilisateur a déjà liké
-        if (!$activite->isLikedBy(auth()->user())) {
+        
+        if (auth()->check() && !$activite->isLikedBy(auth()->user())) {
             $activite->likes()->attach(auth()->id());
         }
-    
+
         return redirect()->back()->with('success', 'Vous avez aimé cette activité.');
     }
-    
+
     public function unlike($id)
     {
         $activite = Activite::findOrFail($id);
-    
-        // Vérifie si l'utilisateur a déjà liké
+        
         if ($activite->isLikedBy(auth()->user())) {
             $activite->likes()->detach(auth()->id());
         }
-    
+
         return redirect()->back()->with('success', 'Vous n\'aimez plus cette activité.');
     }
 }

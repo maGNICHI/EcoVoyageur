@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Activite extends Model
 {
@@ -20,12 +21,16 @@ class Activite extends Model
     }
     public function likes()
     {
-        return $this->belongsToMany(User::class, 'activite_likes', 'activite_id', 'user_id');
+        return $this->belongsToMany(User::class, 'activite_likes', 'activite_id', 'user_id')->withTimestamps();
     }
 
-    // Méthode pour vérifier si l'utilisateur a déjà liké l'activité
-    public function isLikedBy(User $user)
+    public function isLikedBy(User $user = null)
     {
+        $user = $user ?: Auth::user(); // Use the passed user or the authenticated user
+        if (!$user) {
+            return false; // If no user is logged in, return false
+        }
+
         return $this->likes()->where('user_id', $user->id)->exists();
     }
     

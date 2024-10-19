@@ -18,7 +18,10 @@
             <img src="{{ asset('uploads/' . $activite->image) }}" class="img-fluid" width="300" alt="Image de l'activité">
         @endif
     </div>
-
+    <div class="stats-section" style="margin-left: auto;">
+        <span class="stats-text">{{ $activite->avis()->count() }} Avis</span>
+        <span class="stats-text">{{ $activite->likes()->count() }} Like(s)</span>
+    </div>
     <h2>Avis sur cette activité</h2>
     <ul>
         @foreach($activite->avis as $avis)
