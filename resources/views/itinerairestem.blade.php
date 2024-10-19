@@ -71,6 +71,7 @@
             <div class="card-body">
                 <p><strong>Description :</strong>{{ $item->description }}</p>
                 <p><strong>Durée :</strong> {{ $item->duree }}</p>
+                <p><strong>Destination :</strong> {{ $item->destination->nom }}</p>
             </div>
         <!--    <div class="card-footer">
                 <a href="{{ route('itineraires.edit', $item->id) }}" class="btn">Modifier</a>

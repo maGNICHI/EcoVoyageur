@@ -132,6 +132,7 @@
     background-color: #0056b3;
 }
 </style>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 <div class="background-container">
@@ -149,7 +150,7 @@
                 <span class="userimage">
                     <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Avatar" class="user-avatar">
                 </span>
-                <span class="username">Skander</span>
+                <span class="username">{{ Auth::user()->name }}</span>
                 <span class="text-muted">Créé le: {{ $destination->created_at->format('d/m/Y') }}</span>
             </div>
             <div class="timeline-content">
@@ -164,7 +165,29 @@
                 <span class="stats-text">{{ $destination->events()->count() }} Events</span>
             </div>
         </div>
-        
+        <h3>Événements Associés</h3>
+        <div class="card-container">
+            @if($destination->events->isEmpty())
+                <p>Aucun événement associé à cette destination.</p>
+            @else
+                @foreach($destination->events as $event)
+                    <div class="card">
+                        <div class="card-body">
+                            @if($event->image)
+                                <p>
+                                    <img src="{{ asset('uploads/' . $event->image) }}" class="img-fluid" width="300" alt="Image de l'activité">
+                                </p>
+                            @endif
+                            <p><strong>Nom :</strong> {{ $event->nom }}</p>
+                            <p><strong>Description :</strong> {{ $event->description }}</p>
+                            <p><strong>Date Début :</strong> {{ $event->date_debut }}</p>
+                            <p><strong>Date Fin :</strong> {{ $event->date_fin }}</p>
+                            <p><strong>Destination :</strong> {{ $event->destination->nom }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
         <!-- Bouton de retour à la page des destinations -->
         <a href="{{ route('destinations.destination') }}" class="return-button">Retour à la page des destinations</a>
         

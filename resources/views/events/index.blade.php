@@ -67,9 +67,10 @@
         <tr>
             <th>Titre</th>
             <th>Description</th>
-            <th>Date debut</th>
+            <th>Destination</th>
+            <th>Date début</th>
             <th>Date fin</th>
-            
+            <th>Image</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -78,9 +79,16 @@
             <tr>
                 <td>{{ $event->nom }}</td>
                 <td>{{ $event->description }}</td>
+                <td>{{ $event->destination->nom }}</td>
                 <td>{{ $event->date_debut }}</td>
                 <td>{{ $event->date_fin }}</td>
-                
+                <td>
+                @if($event->image)
+                    <img src="{{ asset('uploads/' . $event->image) }}" class="img-fluid" width="150" alt="Image de l'événement">
+                @else
+                    <p>Aucune image</p> <!-- Message si pas d'image -->
+                @endif
+                </td>
                 <td>
                     <a href="{{ route('events.edit', $event->id) }}" class="btn btn-warning">Modifier</a>
                     <form action="{{ route('events.destroy', $event->id) }}" method="POST" style="display:inline;">
@@ -93,4 +101,6 @@
         @endforeach
     </tbody>
 </table>
+
+
 @endsection

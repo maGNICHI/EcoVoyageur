@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('activites', function (Blueprint $table) {
+        Schema::create('reclamations', function (Blueprint $table) {
             $table->id();
-            $table->string('titre');
-            $table->text('contenu');
-            $table->string('image')->nullable(); // Peut être nullable si l'image n'est pas obligatoire
+            $table->string('sujet'); 
+            $table->text('description');
+            #$table->string('duree');
+            $table->string('etat')->default('en attente'); 
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activites');
+        Schema::dropIfExists('reclamations');
     }
 };

@@ -28,7 +28,17 @@
             <label for="titre">Nom de l'Événement</label>
             <input type="text" name="nom" id="titre" class="form-control" value="{{ $event->nom }}" required>
         </div>
-
+        <div class="form-group">
+        <label for="destination_id">Destination</label>
+        <select name="destination_id" class="form-control" required>
+            <option value="">Choisir une destination</option>
+            @foreach ($destinations as $destination)
+                <option value="{{ $destination->id }}" {{ $event->destination_id == $destination->id ? 'selected' : '' }}>
+                    {{ $destination->nom }}
+                </option>
+            @endforeach
+        </select>
+    </div>
         <div class="form-group">
             <label for="description">Description</label>
             <textarea name="description" id="description" class="form-control">{{ $event->description }}</textarea>

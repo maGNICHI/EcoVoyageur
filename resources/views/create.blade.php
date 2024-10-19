@@ -35,6 +35,15 @@
             border-radius: 5px; /* Coins arrondis */
         }
 
+        input.error, textarea.error {
+            border: 2px solid red; /* Bords rouges pour les erreurs */
+        }
+
+        .error-message {
+            color: red; /* Couleur du texte des erreurs */
+            font-size: 12px;
+        }
+
         button {
             background-color: #007bff; /* Couleur de fond du bouton */
             color: white; /* Couleur du texte */
@@ -69,24 +78,41 @@
 
     <h1>Ajouter un Itinéraire</h1>
 
-    <form action="{{ route('itineraires.store') }}" method="POST">
+    <form id="itineraireForm" action="{{ route('itineraires.store') }}" method="POST">
         @csrf
         <div>
             <label for="nom">Nom :</label>
             <input type="text" id="nom" name="nom" required>
+            <div class="error-message" id="error-nom"></div> <!-- Message d'erreur pour le champ nom -->
         </div>
 
         <div>
             <label for="description">Description :</label>
             <textarea id="description" name="description" required></textarea>
+            <div class="error-message" id="error-description"></div> <!-- Message d'erreur pour la description -->
         </div>
 
         <div>
             <label for="duree">Durée :</label>
             <input type="text" id="duree" name="duree" required>
+            <div class="error-message" id="error-duree"></div> <!-- Message d'erreur pour la durée -->
         </div>
-
+        <div>
+        <div class="form-group">
+            <label for="destination_id">Destination</label> <!-- Nouveau champ "destination_id" -->
+            <select name="destination_id" id="destination_id" class="form-control" required>
+                <option value="">Sélectionnez une destination</option>
+                @foreach ($destinations as $destination)
+                    <option value="{{ $destination->id }}" {{ old('destination_id') == $destination->id ? 'selected' : '' }}>
+                        {{ $destination->nom }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+    </div>
         <button type="submit">Ajouter</button>
         <a href="{{ route('itineraires.index') }}" class="btn-retour">Retour</a>
     </form>
+
+   
 @endsection

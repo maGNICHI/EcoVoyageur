@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('avis', function (Blueprint $table) {
+        Schema::create('reponses', function (Blueprint $table) {
             $table->id();
-            $table->text('contenu');
-            $table->foreignId('activite_id')->constrained()->onDelete('cascade'); // Relation avec les activités
+            $table->text('message');
+            $table->foreignId('reclamation_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('avis');
+        Schema::dropIfExists('reponses');
     }
 };
