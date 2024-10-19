@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Partenaire; // Ensure this model exists
+use OwenIt\Auditing\Models\Audit; // Import the Audit model from the package
+
 
 class PartenaireController extends Controller
 {
@@ -84,4 +86,24 @@ class PartenaireController extends Controller
         $partenaires = Partenaire::orderBy('created_at', 'desc')->get();
         return view('partenaireStem', compact('partenaires')); // Assuming you want to display all partenaires
     }
+
+    public function showAuditLogs($id)
+    {
+        $partenaire = Partenaire::findOrFail($id);
+        $audits = $partenaire->audits; // Get audit logs for the specific partenaire
+
+        return view('partenaireAuditLogs', compact('audits', 'partenaire')); // Pass audits and partenaire to the view
+    }
+
+    // Method to show all audit logs
+    public function auditLogs()
+{
+    // Fetch paginated audit records, ordering by created_at in descending order
+    $audits = Audit::orderBy('created_at', 'desc')->paginate(3); // Adjust the number as needed
+
+    return view('index', compact('audits')); // Adjust the view name as necessary
+}
+
+
+
 }

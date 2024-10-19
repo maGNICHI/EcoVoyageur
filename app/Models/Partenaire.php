@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Partenaire extends Model
+
+class Partenaire extends Model implements Auditable
 {
     use HasFactory;
+    use \OwenIt\Auditing\Auditable; // Add this trait
 
     protected $fillable = [
         'nom',

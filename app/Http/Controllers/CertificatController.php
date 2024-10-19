@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Certificat; // Ensure this line is present
 use App\Models\Partenaire; // Import the Partenaire model if necessary
+use SimpleSoftwareIO\QrCode\Facades\QrCode; // Import the QR code facade
+
 
 class CertificatController extends Controller
 {
@@ -131,4 +133,6 @@ class CertificatController extends Controller
         // Return the view 'certificatstem_template' with certificat data
         return view('certificatstem', compact('certificats'));
     }
+
+
 }

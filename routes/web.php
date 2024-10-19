@@ -33,3 +33,13 @@ Route::get('/itinerairestem', [ItineraireController::class, 'itineraireStem'])->
 Route::get('/transportstem', [TransportController::class, 'transportStem'])->name('transportstem');
 Route::get('/certificatstem', [CertificatController::class, 'certificatStem'])->name('certificatstem'); // Added certificat stem route
 Route::get('/partenaireStem', [PartenaireController::class, 'partenaireStem'])->name('partenaireStem'); // Added patenaire stem route
+
+
+// Route to show audit logs for a specific partenaire
+Route::get('partenaires/{id}/audits', [PartenaireController::class, 'showAuditLogs'])->name('partenaires.audits');
+
+// Route to show all audit logs
+Route::get('audits', [PartenaireController::class, 'auditLogs'])->name('audits.index');
+
+
+
