@@ -9,7 +9,6 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                // Clone the specified branch from your GitHub repository using credentials
                 git branch: "${env.GIT_BRANCH}", url: "${env.GIT_REPO_URL}", credentialsId: '123456'
             }
         }
@@ -21,14 +20,11 @@ pipeline {
                         // Install Composer dependencies
                         sh 'composer install --no-interaction --prefer-dist --optimize-autoloader'
 
-                        // Install Node.js dependencies with verbose output and timeout
-                        echo 'Installing npm dependencies...'
-                        timeout(time: 5, unit: 'MINUTES') {
-                            sh 'npm install --verbose'
-                        }
+                        // Configure npm timeout and disable audit
+                        sh 'npm config set timeout 60000'
+                        sh 'npm install --no-audit --verbose'
 
-                        // Build assets if needed
-                        echo 'Building assets...'
+                        // Build assets
                         sh 'npm run prod'
                     } catch (err) {
                         echo 'Failed during Install Dependencies stage'
