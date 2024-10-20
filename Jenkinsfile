@@ -16,8 +16,15 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
+                // Install Composer dependencies
                 sh 'composer install --no-interaction --prefer-dist --optimize-autoloader'
-                sh 'npm install'
+
+                // Install Node.js dependencies with increased timeout
+                sh timeout(120) { // Set timeout to 120 seconds (adjust as needed)
+                    'npm install'
+                }
+
+                // Run production build if needed
                 sh 'npm run prod'
             }
         }
