@@ -25,7 +25,7 @@ pipeline {
         stage('Run Migrations') {
             steps {
                 script {
-                    sh 'php artisan migrate --force'
+                    sh 'php artisan migrate --force --verbose'
                 }
             }
         }
