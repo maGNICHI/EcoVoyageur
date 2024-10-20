@@ -2,71 +2,78 @@ pipeline {
     agent any
 
     environment {
-        GIT_REPO_URL = 'https://github.com/maGNICHI/EcoVoyageur.git'
-        GIT_BRANCH = 'Destination+Event'
+        // Define environment variables if needed (like DB credentials or paths)
     }
 
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                // Clone du repository avec la bonne branche et credentials
-                git branch: "${env.GIT_BRANCH}", url: "${env.GIT_REPO_URL}", credentialsId: '123456'
+                // Checkout the source code from your Git repository
+                git credentialsId: '123456', url: 'https://github.com/maGNICHI/EcoVoyageur.git', branch: 'Destination+Event'
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 script {
-                    try {
-                        // Installation des dépendances Composer
-                        sh 'composer install --no-interaction --prefer-dist --optimize-autoloader'
-
-                        // Installation des dépendances npm avec un timeout augmenté si nécessaire
-                        echo 'Installing npm dependencies...'
-                        timeout(time: 10, unit: 'MINUTES') {
-                            sh 'npm install --verbose'
-                        }
-
-                        // Build des assets (si Laravel Mix est configuré)
-                        echo 'Building assets...'
-                        sh 'npm run prod'
-                    } catch (err) {
-                        echo 'Erreur pendant l\'étape d\'installation des dépendances'
-                        error "Error: ${err}"
-                    }
+                    // Install Composer dependencies for Laravel
+                    sh 'composer install --no-interaction --prefer-dist --optimize-autoloader'
                 }
             }
         }
 
-        stage('Setup Environment') {
+        stage('Run Migrations') {
             steps {
-                // Copie du fichier .env et génération de la clé de l'application
-                sh 'cp .env.example .env'
-                sh 'php artisan key:generate'
+                script {
+                    // Run database migrations if required
+                    sh 'php artisan migrate --force'
+                }
             }
         }
 
         stage('Run Tests') {
             steps {
-                // Exécution des tests unitaires Laravel
-                sh 'php artisan test'
+                script {
+                    // Run the Laravel test suite
+                    sh 'php artisan test'
+                }
+            }
+        }
+
+        stage('Build Assets') {
+            steps {
+                script {
+                    // If you have frontend assets, build them using npm/yarn
+                    sh 'npm install'
+                    sh 'npm run prod'
+                }
             }
         }
 
         stage('Deploy') {
             steps {
-                // Étape fictive de déploiement, à personnaliser selon tes besoins
-                echo 'Déploiement réussi!'
+                script {
+                    // You can deploy your code (for example, by copying files to a web server)
+                    echo 'Deployment process would go here...'
+                }
             }
         }
     }
 
     post {
-        success {
-            echo 'Pipeline réussie!'
+        always {
+            // Clean up workspace after the build
+            cleanWs()
         }
+
+        success {
+            // Notify success (e.g., email or Slack)
+            echo 'Build was successful!'
+        }
+
         failure {
-            echo 'Pipeline échouée!'
+            // Notify failure (e.g., email or Slack)
+            echo 'Build failed.'
         }
     }
 }
