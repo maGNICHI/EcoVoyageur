@@ -35,6 +35,14 @@ pipeline {
             }
         }
 
+        stage('Generate Application Key') {
+            steps {
+                script {
+                    sh 'php artisan key:generate --force'
+                }
+            }
+        }
+
         stage('Test Database Connection') {
             steps {
                 script {
