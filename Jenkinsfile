@@ -1,5 +1,5 @@
 pipeline {
-    agent any  // Utilise n'importe quel agent disponible
+    agent any
 
     environment {
         GIT_REPO_URL = 'https://github.com/maGNICHI/EcoVoyageur.git'
@@ -16,16 +16,25 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                // Install Composer dependencies
-                sh 'composer install --no-interaction --prefer-dist --optimize-autoloader'
+                script {
+                    try {
+                        // Install Composer dependencies
+                        sh 'composer install --no-interaction --prefer-dist --optimize-autoloader'
 
-                // Install Node.js dependencies with increased timeout
-                sh timeout(120) { // Set timeout to 120 seconds (adjust as needed)
-                    'npm install'
+                        // Install Node.js dependencies with verbose output and timeout
+                        echo 'Installing npm dependencies...'
+                        timeout(time: 5, unit: 'MINUTES') {
+                            sh 'npm install --verbose'
+                        }
+
+                        // Build assets if needed
+                        echo 'Building assets...'
+                        sh 'npm run prod'
+                    } catch (err) {
+                        echo 'Failed during Install Dependencies stage'
+                        error "Error: ${err}"
+                    }
                 }
-
-                // Run production build if needed
-                sh 'npm run prod'
             }
         }
 
