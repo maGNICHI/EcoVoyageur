@@ -34,7 +34,16 @@ pipeline {
                 }
             }
         }
-
+        stage('Prepare Environment File') {
+    steps {
+        script {
+            // Vérifier si .env existe déjà
+            if (!fileExists('.env')) {
+                sh 'cp .env.example .env' // Crée le fichier .env à partir de .env.example
+            }
+        }
+    }
+}
         stage('Generate Application Key') {
             steps {
                 script {
