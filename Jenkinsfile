@@ -1,14 +1,19 @@
 pipeline {
     agent any
 
-    environment {
-        APP_ENV = 'production'
-        DB_HOST = 'localhost'
+ environment {
+        GIT_REPO_URL = 'https://github.com/maGNICHI/EcoVoyageur.git'
+        GIT_BRANCH = 'Destination+Event'
+        // Define environment variables if needed (like DB credentials or paths)
     }
 
     stages {
+        stage('Clone Repository') {
         stage('Checkout') {
             steps {
+                // Clone du repository avec la bonne branche et credentials
+                git branch: "${env.GIT_BRANCH}", url: "${env.GIT_REPO_URL}", credentialsId: '123456'
+                // Checkout the source code from your Git repository
                 git credentialsId: '123456', url: 'https://github.com/maGNICHI/EcoVoyageur.git', branch: 'Destination+Event'
             }
         }
