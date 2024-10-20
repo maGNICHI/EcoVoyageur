@@ -9,6 +9,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
+                // Clone du repository avec la bonne branche et credentials
                 git branch: "${env.GIT_BRANCH}", url: "${env.GIT_REPO_URL}", credentialsId: '123456'
             }
         }
@@ -17,17 +18,20 @@ pipeline {
             steps {
                 script {
                     try {
-                        // Install Composer dependencies
+                        // Installation des dépendances Composer
                         sh 'composer install --no-interaction --prefer-dist --optimize-autoloader'
 
-                        // Configure npm timeout and disable audit
-                        sh 'npm config set timeout 60000'
-                        sh 'npm install --no-audit --verbose'
+                        // Installation des dépendances npm avec un timeout augmenté si nécessaire
+                        echo 'Installing npm dependencies...'
+                        timeout(time: 10, unit: 'MINUTES') {
+                            sh 'npm install --verbose'
+                        }
 
-                        // Build assets
+                        // Build des assets (si Laravel Mix est configuré)
+                        echo 'Building assets...'
                         sh 'npm run prod'
                     } catch (err) {
-                        echo 'Failed during Install Dependencies stage'
+                        echo 'Erreur pendant l\'étape d\'installation des dépendances'
                         error "Error: ${err}"
                     }
                 }
@@ -36,6 +40,7 @@ pipeline {
 
         stage('Setup Environment') {
             steps {
+                // Copie du fichier .env et génération de la clé de l'application
                 sh 'cp .env.example .env'
                 sh 'php artisan key:generate'
             }
@@ -43,12 +48,14 @@ pipeline {
 
         stage('Run Tests') {
             steps {
+                // Exécution des tests unitaires Laravel
                 sh 'php artisan test'
             }
         }
 
         stage('Deploy') {
             steps {
+                // Étape fictive de déploiement, à personnaliser selon tes besoins
                 echo 'Déploiement réussi!'
             }
         }
