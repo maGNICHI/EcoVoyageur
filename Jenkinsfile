@@ -17,7 +17,7 @@ pipeline {
                 git credentialsId: '123456', url: 'https://github.com/maGNICHI/EcoVoyageur.git', branch: 'Destination+Event'
             }
         }
-
+        }
         stage('Install Dependencies') {
             steps {
                 script {
