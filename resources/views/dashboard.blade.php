@@ -163,23 +163,6 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-
-      <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Paternaire</span>
-
-          </a>
-
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Certif</span>
-            </span>
-          </a>
-
-        </li>
-
         <li><a href="{{ route('destinations.index') }}">
         <i class="fa fa-edit"></i> Destination</a></li>
           <!-- <a href="pages/widgets.html">
@@ -214,11 +197,7 @@
         </li>
 
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Hebergement</span>
-
-          </a>
+       
           <li>
           <a href="{{ route('reclamations.index1') }}">
             <i class="fa fa-edit"></i> <span>Reclmations</span>
@@ -233,13 +212,7 @@
           </a>
         </li>
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Avis</span>
-
-          </a>
-
-        </li>
+       
 
         <li class="treeview">
           <a href="">
@@ -253,6 +226,7 @@
             <li><a href="">
             <li><a href="{{ route('partenaires.index') }}"><i class="fa fa-edit"></i> Partenaire</a></li>
             <li><a href="{{ route('certificats.index') }}"><i class="fa fa-files-o"></i> Certificat</a></li>
+            <li><a href="{{ route('audits.index') }}"><i class="fa fa-files-o"></i> Log</a></li>
 
           </ul>
         </li>

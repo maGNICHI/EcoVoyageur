@@ -132,7 +132,6 @@
 
                                 </ul>
                             </li>
-                            <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li>
                 <li><a href="{{ route('reclamations.create') }}"> Réclamation</a></li>
     
             </ul>

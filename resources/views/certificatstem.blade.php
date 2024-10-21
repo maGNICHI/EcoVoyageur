@@ -1,64 +1,53 @@
 <style>
-    .background-container {
-        background-color: #dfe7f2; /* Background color of the container */
-        margin: 0;
-        padding: 0;
-        min-height: 100vh; /* Ensures the container takes the full height of the page */
-    }
-    .card-container {
+    /* Add styles for star rating */
+    .star-rating {
         display: flex;
-        flex-wrap: wrap;
-        gap: 20px; /* Spacing between the cards */
+        flex-direction: row-reverse; /* Reverse to make the highest star on the left */
+        justify-content: flex-end; /* Align stars to the right */
+        margin-top: 10px;
     }
 
-    .card {
-        margin-left: 40px;
-        margin-top: 12px;
-        margin-bottom: 34px;
-        background-color: #f9f9f9; /* Background color of the card */
-        border: 1px solid #ddd; /* Border of the card */
-        border-radius: 8px; /* Rounded corners */
-        padding: 20px; /* Inner spacing */
-        width: calc(33.33% - 20px); /* Width of the card (3 per row) */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Card shadow */
+    .star {
+        font-size: 30px; /* Size of the stars */
+        color: #ddd; /* Default star color */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: color 0.2s; /* Smooth color transition */
     }
 
-    .card-header {
-        margin-bottom: 15px; /* Spacing between the title and body */
+    /* Change star color on hover */
+    .star:hover,
+    .star:hover ~ .star {
+        color: #f7d51d; /* Color on hover */
     }
 
-    .card-body {
-        margin-bottom: 15px; /* Spacing between body and footer */
+    /* Highlight selected stars */
+    input[type="radio"]:checked ~ .star {
+        color: #f7d51d; /* Color for selected stars */
     }
 
-    .card-footer {
-        display: flex;
-        justify-content: space-between; /* Spacing between buttons */
-    }
-
-    .btn {
-        background-color: #007bff; /* Background color of the button */
-        color: white; /* Text color of the button */
-        padding: 10px 15px; /* Inner spacing of the button */
-        border: none; /* No border */
-        border-radius: 5px; /* Rounded corners */
-        text-decoration: none; /* No underline */
-        cursor: pointer; /* Hand cursor */
-    }
-
-    .btn:hover {
-        background-color: #0056b3; /* Background color on hover */
+    /* Hide radio buttons */
+    input[type="radio"] {
+        display: none;
     }
 </style>
-
 <div class="background-container">
-
-    @include('nav') {{-- Includes your navigation file --}}
+    @include('nav')
 
     <h1 style="margin-top: 100px; margin-left: 73px">Liste des Certificats</h1>
 
     @if(session('success'))
         <div>{{ session('success') }}</div>
+    @endif
+
+    @if($expiringSoon->isNotEmpty())
+        <div style="margin: 20px; padding: 10px; background-color: #ffcc00; border-radius: 5px;">
+            <strong>Alerte:</strong> Certains certificats expirent bientôt!
+            <ul>
+                @foreach($expiringSoon as $certificat)
+                    <li>{{ $certificat->nom }} - Date d'expiration : {{ \Carbon\Carbon::parse($certificat->date_expiration)->format('d/m/Y') }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
 
     <div class="card-container">
@@ -72,13 +61,28 @@
                     <p><strong>Organisme Émetteur :</strong> {{ $certificat->organisme_emetteur }}</p>
                     <p><strong>Date d'Attribution :</strong> {{ \Carbon\Carbon::parse($certificat->date_attribution)->format('d/m/Y') }}</p>
                     <p><strong>Date d'Expiration :</strong> {{ \Carbon\Carbon::parse($certificat->date_expiration)->format('d/m/Y') }}</p>
-                    <p><strong>Partenaire :</strong> {{ $certificat->partenaire ? $certificat->partenaire->nom : 'N/A' }}</p> <!-- Assuming 'nom' is the field for the partner name -->
+                    <p><strong>Partenaire :</strong> {{ $certificat->partenaire ? $certificat->partenaire->nom : 'N/A' }}</p>
+                    <p><strong>Note moyenne :</strong> {{ $certificat->averageRating() ?? 'Aucune note' }}</p>
+
+                    @if(auth()->check())
+                        <form action="{{ route('certificats.rate', $certificat->id) }}" method="POST" class="star-rating-form">
+                            @csrf
+                            <div class="star-rating">
+                                @for($i = 5; $i >= 1; $i--) <!-- Display stars from 5 to 1 -->
+                                    <input type="radio" name="rating" id="star{{ $certificat->id }}-{{ $i }}" value="{{ $i }}" />
+                                    <label class="star" for="star{{ $certificat->id }}-{{ $i }}" title="{{ $i }} stars">★</label>
+                                @endfor
+                            </div>
+                            <button type="submit">Évaluer</button>
+                        </form>
+                    @else
+                        <p>Vous devez être connecté pour évaluer ce certificat.</p>
+                    @endif
                 </div>
-               
             </div>
         @endforeach
     </div>
 
-    @include('footer') {{-- Includes your footer file --}}
-
+    @include('footer')
 </div>
+

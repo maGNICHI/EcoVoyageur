@@ -42,6 +42,10 @@
         .btn-danger {
             background-color: #dc3545;
         }
+
+        .btn-info {
+            background-color: #17a2b8; /* Add a color for the new button */
+        }
     </style>
 
     <h1>Liste des Partenaires</h1>
@@ -74,6 +78,8 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce partenaire ?')">Supprimer</button>
+                            <a href="{{ route('partenaires.audits', $partenaire->id) }}" class="btn btn-info" style="margin-left: 5px;">Logs d'Activité</a>
+
                         </form>
                     </td>
                 </tr>

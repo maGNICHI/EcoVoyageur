@@ -14,11 +14,22 @@ return new class extends Migration
     public function up()
     {
         Schema::create('activites', function (Blueprint $table) {
-          $table->id();
-          $table->string('titre');
-          $table->text('contenu');
-          $table->string('image')->nullable(); // Peut être nullable si l'image n'est pas obligatoire
-          $table->timestamps();
+            $table->id();
+            $table->string('titre');
+            $table->text('contenu');
+            $table->string('image')->nullable(); // Peut être nullable si l'image n'est pas obligatoire
+            $table->unsignedBigInteger('user_id');
+            $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
+        });
+        Schema::create('activite_likes', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('activite_id');
+            $table->unsignedBigInteger('user_id');
+            $table->timestamps();
+    
+            $table->foreign('activite_id')->references('id')->on('activites')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -29,6 +40,7 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('activite_likes');
         Schema::dropIfExists('activites');
     }
 };

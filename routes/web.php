@@ -65,12 +65,26 @@ Route::get('/avisstem', [AvisController::class, 'avisStem'])->name('avisstem');
 Route::post('/avis/{activite}', [AvisController::class, 'store'])->name('avis.store');
 
 
+Route::post('activites/{id}/like', [ActiviteController::class, 'like'])->name('activites.like');
+Route::post('activites/{id}/unlike', [ActiviteController::class, 'unlike'])->name('activites.unlike');
+
 Route::delete('/avis/{avis}', [AvisController::class, 'destroy'])->name('avis.destroy');
 
 Route::resource('certificats', CertificatController::class); // Added certificat routes
 Route::resource('partenaires', PartenaireController::class);
 Route::get('/certificatstem', [CertificatController::class, 'certificatStem'])->name('certificatstem'); // Added certificat stem route
 Route::get('/partenaireStem', [PartenaireController::class, 'partenaireStem'])->name('partenaireStem'); // Added patenaire stem route
+// Route to show audit logs for a specific partenaire
+Route::get('partenaires/{id}/audits', [PartenaireController::class, 'showAuditLogs'])->name('partenaires.audits');
+
+// Route to show all audit logs
+Route::get('audits', [PartenaireController::class, 'auditLogs'])->name('audits.index');
+
+Route::post('certificats/{id}/rate', [CertificatController::class, 'rate'])->name('certificats.rate');
+
+
+
+
 
 Route::get('reclamations1', [ReclamationController::class, 'index1'])->name('reclamations.index1');
 Route::resource('reclamations', ReclamationController::class);

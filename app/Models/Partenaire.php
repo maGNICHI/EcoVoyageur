@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Partenaire extends Model
+
+class Partenaire extends Model implements Auditable
 {
     use HasFactory;
+    use \OwenIt\Auditing\Auditable; // Add this trait
 
     protected $fillable = [
         'nom',
@@ -29,6 +32,6 @@ class Partenaire extends Model
     // Méthode pour récupérer les types de transport
     public static function types()
     {
-        return ['Partenaire Hébergement', 'Partenaire Transport', 'Partenaire Tourisme Responsable'];
+        return ['hebergement', 'transport', 'activite'];
     }
 }

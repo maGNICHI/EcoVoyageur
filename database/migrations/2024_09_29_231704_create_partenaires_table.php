@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('email')->unique(); // Email of the partner
             $table->string('adresse'); // Address of the partner
             $table->string('telephone'); // Phone number of the partner
-            $table->enum('type', ['Partenaire Hébergement', 'Partenaire Transport', 'Partenaire Tourisme Responsable']); // Type of partner (adjust values accordingly)
+            $table->enum('type', ['hebergement', 'transport', 'activite']); // Type of partner (adjust values accordingly)
             $table->timestamps(); // Timestamps (created_at and updated_at)
         });
     }

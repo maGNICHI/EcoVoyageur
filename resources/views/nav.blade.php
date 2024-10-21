@@ -27,11 +27,9 @@
       /* Style for Navigation Background */
       nav.main-nav {
     background-color: #dfe7f2; /* Nouvelle couleur d'arrière-plan */
-    
     backdrop-filter: none; /* Retirer l'effet de flou (si nécessaire) */
 }
 
-    
 /* Changer la couleur du texte des liens dans la nav */
 nav.main-nav ul.nav li a {
     color: black; /* Couleur du texte noir pour les liens */
@@ -41,7 +39,6 @@ nav.main-nav ul.nav li a {
 nav.main-nav ul.nav li a:hover {
     color: #007bff; /* Couleur bleue sur hover */
 }
-
     </style>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -75,7 +72,6 @@ nav.main-nav ul.nav li a:hover {
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                         <li class="scroll-to-section"><a href="/" class="active">Home</a></li>
-                        <li class="scroll-to-section"><a href="#about">About</a></li>
                             <li><a href="{{ route('activitestem') }}">Activites</a></li>
 
                             <li class="submenu">
@@ -85,13 +81,7 @@ nav.main-nav ul.nav li a:hover {
                                     <li><a href="{{ route('transportstem') }}">Transport</a></li>
                                 </ul>
                             </li>
-                            <li class="submenu">
-                                <a href="javascript:;">reclamation</a>
-                                <ul>
-    <li class="scroll-to-section">
-        <a href="{{ route('reclamations.create') }}">Reclamation</a></li>
                             <li><a href="{{ route('destinations.destination') }}">Destination</a></li>
-                            <li><a href="{{ route('events.event') }}">Event</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Partenaire</a>
                                 <ul>
@@ -100,7 +90,9 @@ nav.main-nav ul.nav li a:hover {
 
                                 </ul>
                             </li>
-                            <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li>
+                            <li class="scroll-to-section">
+                                <a href="{{ route('reclamations.create') }}">Reclamation</a>
+                            </li>
 
                         </ul>
                         <a class='menu-trigger'>

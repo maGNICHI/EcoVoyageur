@@ -60,7 +60,6 @@ https://templatemo.com/tm-543-breezed
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="/" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="#about">About</a></li>
                             <li><a href="{{ route('activitestem') }}">Activites</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Deplacement</a>
@@ -87,7 +86,6 @@ https://templatemo.com/tm-543-breezed
 
                                 </ul>
                             </li>
-                            <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li>
                             <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                          <li>
