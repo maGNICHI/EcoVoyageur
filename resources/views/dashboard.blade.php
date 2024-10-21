@@ -253,10 +253,7 @@
             <li><a href="">
             <li><a href="{{ route('partenaires.index') }}"><i class="fa fa-edit"></i> Partenaire</a></li>
             <li><a href="{{ route('certificats.index') }}"><i class="fa fa-files-o"></i> Certificat</a></li>
-<<<<<<< Updated upstream
-=======
             <li><a href="{{ route('audits.index') }}"><i class="fa fa-files-o"></i> Logs</a></li>
->>>>>>> Stashed changes
 
           </ul>
         </li>

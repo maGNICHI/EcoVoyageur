@@ -71,18 +71,13 @@ Route::resource('certificats', CertificatController::class); // Added certificat
 Route::resource('partenaires', PartenaireController::class);
 Route::get('/certificatstem', [CertificatController::class, 'certificatStem'])->name('certificatstem'); // Added certificat stem route
 Route::get('/partenaireStem', [PartenaireController::class, 'partenaireStem'])->name('partenaireStem'); // Added patenaire stem route
-<<<<<<< Updated upstream
-=======
+
 Route::get('partenaires/{id}/audits', [PartenaireController::class, 'showAuditLogs'])->name('partenaires.audits');
 
 Route::get('audits', [PartenaireController::class, 'auditLogs'])->name('audits.index');
 
 Route::post('certificats/{id}/rate', [CertificatController::class, 'rate'])->name('certificats.rate');
 
-
-
-
->>>>>>> Stashed changes
 
 Route::get('reclamations1', [ReclamationController::class, 'index1'])->name('reclamations.index1');
 Route::resource('reclamations', ReclamationController::class);

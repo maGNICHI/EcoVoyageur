@@ -25,8 +25,7 @@ class Certificat extends Model
     {
         return $this->belongsTo(Partenaire::class);
     }
-<<<<<<< Updated upstream
-=======
+
 
     public function ratings()
     {
@@ -47,5 +46,4 @@ class Certificat extends Model
 
         return $this->ratings()->where('user_id', $user->id)->exists();
     }
->>>>>>> Stashed changes
 }
