@@ -202,7 +202,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube') {
-                        sh 'sonar-scanner -Dsonar.projectKey=your_project_key -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONAR_TOKEN}'
+                        sh 'sonar-scanner -Dsonar.projectKey=sonarqube -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${squ_f6905c71d09e363509f92ed73984f9116d03551a}'
                     }
                 }
             }
