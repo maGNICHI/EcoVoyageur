@@ -201,8 +201,17 @@ pipeline {
         stage('Run SonarQube Analysis') {
             steps {
                 script {
+                    // Using SonarQube environment and proper tool configuration
                     withSonarQubeEnv('SonarQube') {
-                        sh 'sonar-scanner -Dsonar.projectKey=sonarqube -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${squ_f6905c71d09e363509f92ed73984f9116d03551a}'
+                        def scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                        withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                            sh """
+                                ${scannerHome}/bin/sonar-scanner \
+                                -Dsonar.projectKey=sonarqube \
+                                -Dsonar.host.url=${SONARQUBE_URL} \
+                                -Dsonar.login=${SONAR_TOKEN}
+                            """
+                        }
                     }
                 }
             }
@@ -211,7 +220,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build Docker image
                     sh """
                         docker build -t ${DOCKER_IMAGE}:latest .
                     """
