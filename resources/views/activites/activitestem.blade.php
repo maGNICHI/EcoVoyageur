@@ -173,7 +173,8 @@
                     <span class="userimage">
                         <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Avatar" class="user-avatar">
                     </span>
-                    <span class="username">Créateur: Manar</span>
+                    <span class="username"> admin</span>
+                   <!-- <span class="username"> {{$activite->user->name}}</span>-->
                     <span class="text-muted">Créé le : {{ $activite->created_at->format('F j, Y, g:i a') }}</span>
                 </div>
                 <div class="timeline-content">
@@ -188,8 +189,29 @@
 
                 {{-- Réactions et statistiques --}}
                 <div class="timeline-footer">
-                    <span class="stats-text">{{  $activite->avis()->count()}} Avis</span>
+                    <div class="reaction-section">
+                        <form action="{{ route('activites.like', $activite->id) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @if($activite->isLikedBy(auth()->user()))
+                                <button type="submit" style="background: none; border: none; cursor: pointer; display: flex; align-items: center;">
+                                    <i class="fa fa-thumbs-down fa-fw fa-lg" style="margin-right: 5px;"></i>
+                                    <span>Dislike</span>
+                                </button>
+                            @else
+                                <button type="submit" style="background: none; border: none; cursor: pointer; display: flex; align-items: center;">
+                                    <i class="fa fa-thumbs-up fa-fw fa-lg" style="margin-right: 5px;"></i>
+                                    <span>Like</span>
+                                </button>
+                            @endif
+                        </form>
+                    </div>
+                    
+                    <div class="stats-section" style="margin-left: auto;">
+                        <span class="stats-text">{{ $activite->avis()->count() }} Avis</span>
+                        <span class="stats-text">{{ $activite->likes()->count() }} Like(s)</span>
+                    </div>
                 </div>
+                
 
                 {{-- Bouton pour afficher/masquer les avis --}}
                 <span class="toggle-avis" onclick="toggleAvis(this)">Afficher les avis</span>
@@ -200,7 +222,7 @@
                         <div class="timeline-comment-box">
                             <div class="timeline-header">
                                 <span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></span>
-                                <span class="username">Utilisateur</span>
+                                <span class="username">{{$avis->user->name}}</span>
                                 <span class="text-muted">{{ $avis->created_at->format('d/m/Y') }}</span>
                                 <span class="delete-icon">
                                     <form action="{{ route('avis.destroy', $avis->id) }}" method="POST" style="display: inline;">

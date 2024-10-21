@@ -73,6 +73,7 @@
                 <th>Contenu</th>
                 <th>Image</th>
                 <th>Nbr Avis</th>
+                <th>Nbr likes</th>
                 <th>date de creation</th>
                 <th>Actions</th> <!-- Colonne pour les actions -->
             </tr>
@@ -88,6 +89,7 @@
                     </td>
                     @endif
                     <td>{{ $item->avis()->count() }}</td>
+                    <td>{{ $item->likes()->count() }}</td>
                     <td>{{ $item->created_at->format('F j, Y, g:i a') }}</td>
                     <td>
                         <a href="{{ route('activites.show', $item->id) }}" class="btn btn-info">Détails</a>

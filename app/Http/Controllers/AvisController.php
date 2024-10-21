@@ -31,6 +31,7 @@ class AvisController extends Controller
         $avis = new Avis;
         $avis->contenu = $request->input('contenu');
         $avis->activite_id = $activite->id; // Ensure activite_id is correctly set
+        $avis->user_id = auth()->id(); 
         $avis->save();
 
         return redirect()->route('activitestem', $activite->id)->with('success');

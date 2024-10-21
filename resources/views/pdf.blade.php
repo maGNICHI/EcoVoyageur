@@ -3,7 +3,6 @@
 <head>
     <title>Détails du Transport</title>
     <style>
-       
         body {
             font-family: 'DejaVu Sans', sans-serif;
         }
