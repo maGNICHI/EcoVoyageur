@@ -14,7 +14,7 @@ class Transport extends Model
         return $this->belongsTo(Itineraire::class);
     }
 
-    // Méthode pour récupérer les types de transport
+   
     public static function types()
     {
         return ['velo', 'bateau', 'avion', 'bus', 'train'];

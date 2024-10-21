@@ -70,6 +70,7 @@ https://templatemo.com/tm-543-breezed
 
                                 </ul>
                             </li>
+
                             <li><a href="{{ route('destinations.destination') }}">Destination</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Partenaire</a>
@@ -366,7 +367,7 @@ Rejoignez-nous pour voyager autrement, en explorant le monde de manière respons
     <!-- ***** Testimonials Ends ***** -->
 
     <!-- ***** Contact Us Area Starts ***** -->
-    <section class="section" id="contact-us">
+   
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-12">
@@ -386,7 +387,7 @@ Rejoignez-nous pour voyager autrement, en explorant le monde de manière respons
                     <div class="contact-form">
                         <form id="contact" action="" method="get">
                           <div class="row">
-                            <div class="col-md-6 col-sm-12">
+                        <section class="section" id="contact-us">     <div class="col-md-6 col-sm-12">
                               <fieldset>
                                 <input name="name" type="text" id="name" placeholder="Votre nom *" required="">
                               </fieldset>
