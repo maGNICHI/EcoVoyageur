@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>
 
   </title>
@@ -39,6 +40,8 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  -->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -53,13 +56,93 @@
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+    <!-- Sidebar toggle button -->
+    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
-      </a>
+    </a>
+
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div class="container">
 
 
-    </nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left side of navbar (Add more navigation items if needed) -->
+            <ul class="navbar-nav mr-auto">
+                <!-- Add links or navigation items here -->
+            </ul>
+
+            <!-- Right side of navbar -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Authentication Links -->
+                @guest
+                    @if (Route::has('login'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                    @endif
+
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                    @endif
+                @else
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle line-height=50px" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ Auth::user()->name }}
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endguest
+            </ul>
+        </div>
+    </div>
+
+    <style>
+        /* Style pour la barre de navigation */
+        .navbar {
+            background-color: #007bff; /* Couleur de fond de la barre de navigation */
+        }
+
+        /* Style pour le nom de l'utilisateur */
+        .navbar-nav .nav-item .nav-link {
+            color: #ffffff !important; /* Couleur du texte (blanc) */
+            font-weight: bold; /* Mettre le texte en gras */
+
+        }
+
+        /* Style pour le lien de déconnexion */
+        .navbar-nav .nav-item .dropdown-menu .dropdown-item {
+            color: #333333; /* Couleur du texte (noir ou gris foncé) */
+
+        }
+        .navbar-nav .nav-item .dropdown-toggle {
+        line-height: 50px; /* Définit la hauteur de ligne à 50 pixels */
+        margin-left:711px;
+    }
+        /* Style pour le lien de déconnexion au survol */
+        .navbar-nav .nav-item .dropdown-menu .dropdown-item:hover {
+            background-color: #f8f9fa; /* Couleur de fond au survol */
+            color: #007bff; /* Couleur du texte au survol (bleu) */
+        }
+        .dropdown-menu.dropdown-menu-end.show {
+        margin-left: 663px; /* Décalage à gauche */
+        margin-top: -25px; /* Décalage vers le haut */
+    }
+    </style>
+</nav>
+
+
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
@@ -81,32 +164,19 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
 
-      <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Paternaire</span>
-
-          </a>
-
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Certif</span>
-            </span>
-          </a>
-
-        </li>
-        <li>
-          <a href="pages/widgets.html">
+        <li><a href="{{ route('destinations.index') }}">
+        <i class="fa fa-edit"></i> Destination</a></li>
+          <!-- <a href="pages/widgets.html">
             <i class="fa fa-th"></i> <span>Destination</span>
-          </a>
-        </li>
+          </a> -->
         <li class="treeview">
-          <a href="#">
+        <li><a href="{{ route('events.index') }}">
+        <i class="fa fa-edit"></i> Event</a></li>
+          <!-- <a href="#">
             <i class="fa fa-pie-chart"></i>
             <span>Event</span>
 
-          </a>
+          </a> -->
 
         </li>
         <li class="treeview">
@@ -128,21 +198,58 @@
 
 
         <li class="treeview">
-        <li><a href="{{ route('reclamations.index1') }}"><i class="fa fa-edit"></i> reclamation </a></li>
-</li>
-        <li class="treeview">
+
           <a href="#">
-            <i class="fa fa-edit"></i> <span>Activite</span>
+            <i class="fa fa-edit"></i> <span>Hebergement</span>
 
           </a>
 
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-edit"></i> <span>Avis</span>
+            <i class="fa fa-edit"></i> <span>Reclamation</span>
 
           </a>
 
+        </li>
+        <li>
+          <a href="{{ route('activites.index') }}">
+            <i class="fa fa-edit"></i> <span>Activite</span>
+
+          </a>
+        </li>
+
+        <li class="treeview">
+          <a href="">
+            <i class="fa fa-edit"></i>
+            <span>Partenaire</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="">
+            <li><a href="{{ route('partenaires.index') }}"><i class="fa fa-edit"></i> Partenaire</a></li>
+            <li><a href="{{ route('certificats.index') }}"><i class="fa fa-files-o"></i> Certificat</a></li>
+
+          </ul>
+        </li>
+
+  <!--!users-->
+  <li class="treeview">
+          <a href="">
+            <i class="fa fa-pie-chart"></i>
+            <span>Login</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="">
+            <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
+
+
+          </ul>
         </li>
       </ul>
     </section>
@@ -405,5 +512,8 @@
 <script src="/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/dist/js/demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>

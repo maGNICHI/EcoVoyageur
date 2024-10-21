@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <title>Breezed HTML Bootstrap Template</title>
@@ -37,6 +40,8 @@ nav.main-nav ul.nav li a:hover {
     color: #007bff; /* Couleur bleue sur hover */
 }
     </style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     </head>
 
@@ -66,9 +71,10 @@ nav.main-nav ul.nav li a:hover {
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="#about">About</a></li>
-                            <li class="scroll-to-section"><a href="#projects">Projects</a></li>
+                        <li class="scroll-to-section"><a href="/" class="active">Home</a></li>
+
+                            <li><a href="{{ route('activitestem') }}">Activites</a></li>
+
                             <li class="submenu">
                                 <a href="javascript:;">Deplacement</a>
                                 <ul>
@@ -76,22 +82,56 @@ nav.main-nav ul.nav li a:hover {
                                     <li><a href="{{ route('transportstem') }}">Transport</a></li>
                                 </ul>
                             </li>
-                            <li class="submenu">
-                                <a href="javascript:;">reclamation</a>
-                                <ul>
-    <li class="scroll-to-section">
-        <a href="{{ route('reclamations.create') }}">Reclamation</a></li>
 
-                               
+                            <li><a href="{{ route('destinations.destination') }}">Destination</a></li>
+                            <li class="submenu">
+                                <a href="javascript:;">Partenaire</a>
+                                <ul>
+                                    <li><a href="{{ route('partenaireStem') }}">Partenaire</a></li>
+                                    <li><a href="{{ route('certificatstem') }}">Certificat</a></li>
+
                                 </ul>
                             </li>
-                            <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li>
-
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
                         </a>
                         <!-- ***** Menu End ***** -->
+                        <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                  <!--      <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
+                      <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
+-->
+                            <li class="nav-item dropdown">
+    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" margin-top: 19px;  margin-left: 897px;" >
+        {{ Auth::user()->name }}
+    </a>
+    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{{ route('logout') }}"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    </div>
+</li>
+
+                        @endguest
+                    </ul>
                     </nav>
                 </div>
             </div>
@@ -149,6 +189,9 @@ nav.main-nav ul.nav li a:hover {
             });
         });
     </script>
+    <!-- Bootstrap JS et Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
     </body>
 </html>
