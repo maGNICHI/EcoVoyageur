@@ -91,8 +91,7 @@ pipeline {
             steps {
                 script {
                     sh 'npm config set registry https://registry.npm.taobao.org' // Use a different npm registry
-                    sh 'npm config set timeout 60000' // Set timeout to 60 seconds
-                    sh 'npm install'
+                    sh 'npm install --timeout=60000' // Set timeout directly in the npm command
                     sh 'npm run build' // Check if npm run prod or build is used
                 }
             }
