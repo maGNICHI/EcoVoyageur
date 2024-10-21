@@ -14,7 +14,6 @@ class ItineraireController extends Controller
      */
     public function index()
     {
-
     $itineraire = Itineraire::orderBy('created_at', 'desc')->get();
 
 

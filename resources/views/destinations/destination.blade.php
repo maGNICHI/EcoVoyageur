@@ -70,6 +70,7 @@
                 <div class="card">
                     <div class="card-body">
                         <p><strong>Nom :</strong> {{ $destination->nom }}</p>
+                        <p><strong>Description :</strong> {{ $destination->description }}</p>
                         <!-- <p><strong>Pays :</strong> {{ $destination->pays }}</p> -->
                         <p><strong>Description :</strong> {{ $destination->description }}</p>
                         <!-- <p><strong>Activité Locale :</strong> {{ $destination->activite_locale }}</p> -->
@@ -78,7 +79,9 @@
                         <p><strong>Latitude :</strong> {{ $destination->latitude }}</p>
                         <p><strong>Longitude :</strong> {{ $destination->longitude }}</p>
                     </div>
-
+                    <div class="timeline-footer card-footer">
+                    <a href="{{ route('destinations.show', $destination->id) }}" class="btn btn-primary">Voir plus</a>
+                </div>
                 </div>
             @endforeach
         </div>

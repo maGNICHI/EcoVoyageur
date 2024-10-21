@@ -29,6 +29,7 @@ class Partenaire extends Model
     // Méthode pour récupérer les types de transport
     public static function types()
     {
+        return ['Partenaire Hébergement', 'Partenaire Transport', 'Partenaire Tourisme Responsable'];
         return ['hebergement', 'transport', 'activite'];
     }
 }

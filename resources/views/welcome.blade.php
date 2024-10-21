@@ -8,7 +8,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Breezed HTML Bootstrap Template</title>
 
 <!--
@@ -28,6 +29,7 @@ https://templatemo.com/tm-543-breezed
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
 
     <link rel="stylesheet" href="assets/css/lightbox.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     </head>
 
@@ -78,6 +80,41 @@ https://templatemo.com/tm-543-breezed
                                 </ul>
                             </li>
                             <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li>
+                            <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
+                         <li>
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+
+                            <li class="nav-item dropdown">
+    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top: 0px;">
+        {{ Auth::user()->name }}
+    </a>
+    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{{ route('logout') }}"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    </div>
+</li>
+
+                        @endguest
+                    </ul>
+</li>
                             <div class="search-icon">
                                 <a href="#search"><i class="fa fa-search"></i></a>
                             </div>
@@ -452,6 +489,9 @@ Rejoignez-nous pour voyager autrement, en explorant le monde de manière respons
         });
 
     </script>
+    <!-- Bootstrap JS et Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
   </body>
 </html>
