@@ -71,6 +71,14 @@ pipeline {
             }
         }
 
+        stage('Check NPM Connectivity') {
+            steps {
+                script {
+                    sh 'curl -I https://registry.npmjs.org'
+                }
+            }
+        }
+
         stage('Run Tests') {
             steps {
                 script {
