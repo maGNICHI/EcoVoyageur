@@ -50,3 +50,6 @@ class LoginController extends Controller
         return redirect()->to('/'); // Redirection vers la page d'accueil
     }
 }
+
+
+  
