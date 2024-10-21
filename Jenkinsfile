@@ -10,7 +10,7 @@ pipeline {
         DB_DATABASE = 'tourisme'
         DB_USERNAME = 'root'
         DB_PASSWORD = '12345678'
-        NPM_CONFIG_FORCE_IPV4 = 'true'
+        
     }
 
     stages {
@@ -91,9 +91,9 @@ pipeline {
         stage('Build Assets') {
             steps {
                 script {
-                    sh 'npm config set strict-ssl false' // Disable SSL temporarily
-                    sh 'npm config set fetch-retry-maxtimeout 120000'
-                    sh 'npm config set fetch-retry-mintimeout 30000'
+                    sh 'npm config set strict-ssl false' // Désactiver SSL temporairement
+                    sh 'npm config set prefer-ipv4 true' // Forcer l'utilisation d'IPv4
+                    sh 'npm config set registry https://registry.npmjs.org/' // Utiliser le registre npm en HTTP
                     sh 'npm install --timeout=60000'
                     sh 'npm run build'
                 }
