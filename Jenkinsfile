@@ -10,6 +10,7 @@ pipeline {
         DB_DATABASE = 'tourisme'
         DB_USERNAME = 'root'
         DB_PASSWORD = '12345678'
+        NPM_CONFIG_FORCE_IPV4 = 'true'
     }
 
     stages {
@@ -91,6 +92,8 @@ pipeline {
             steps {
                 script {
                     sh 'npm config set strict-ssl false' // Disable SSL temporarily
+                    sh 'npm config set fetch-retry-maxtimeout 120000'
+                    sh 'npm config set fetch-retry-mintimeout 30000'
                     sh 'npm install --timeout=60000'
                     sh 'npm run build'
                 }
