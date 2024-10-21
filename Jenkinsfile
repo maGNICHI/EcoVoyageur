@@ -90,9 +90,9 @@ pipeline {
         stage('Build Assets') {
             steps {
                 script {
-                    sh 'npm config set registry https://registry.npm.taobao.org' // Use a different npm registry
-                    sh 'npm install --timeout=60000' // Set timeout directly in the npm command
-                    sh 'npm run build' // Check if npm run prod or build is used
+                    sh 'npm config set strict-ssl false' // Disable SSL temporarily
+                    sh 'npm install --timeout=60000'
+                    sh 'npm run build'
                 }
             }
         }
