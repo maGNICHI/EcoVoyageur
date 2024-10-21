@@ -30,5 +30,6 @@ class Partenaire extends Model
     public static function types()
     {
         return ['Partenaire Hébergement', 'Partenaire Transport', 'Partenaire Tourisme Responsable'];
+        return ['hebergement', 'transport', 'activite'];
     }
 }

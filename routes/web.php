@@ -14,12 +14,10 @@ use App\Http\Controllers\UserController;
 use App\Models\Transport; // Ajoutez cette ligne pour importer le modèle Transport
 use Illuminate\Support\Facades\Auth;
 
-// use Illuminate\Support\Facades\Auth;
-
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
+|--------------------------------------------------------------------------|
+| Web Routes                                                              |
+|--------------------------------------------------------------------------|
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
@@ -38,16 +36,18 @@ Route::get('/dashboard', function () {
     return view('dashboard'); // Assurez-vous que la vue dashboard existe
 })->middleware('auth')->name('dashboard');
 
+
 Route::resource('itineraires', ItineraireController::class);
 Route::resource('transports', TransportController::class);
+Route::resource('certificats', CertificatController::class); // Added certificat routes
+
+Route::resource('partenaires', PartenaireController::class);
+
 Route::get('/itinerairestem', [ItineraireController::class, 'itineraireStem'])->name('itinerairestem');
 Route::get('/transportstem', [TransportController::class, 'transportStem'])->name('transportstem');
 Route::get('/search-transport', [TransportController::class, 'search'])->name('transport.search');
 
 Route::get('transports/{id}/download-pdf', [TransportController::class, 'downloadPDF'])->name('transports.download-pdf');
-
-
-
 
 Route::resource('destinations', DestinationController::class);
 Route::get('/destinations', [DestinationController::class, 'index'])->name('destinations.index');
@@ -77,3 +77,4 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);});
+

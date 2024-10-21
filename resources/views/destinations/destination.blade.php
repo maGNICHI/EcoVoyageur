@@ -71,6 +71,10 @@
                     <div class="card-body">
                         <p><strong>Nom :</strong> {{ $destination->nom }}</p>
                         <p><strong>Description :</strong> {{ $destination->description }}</p>
+                        <!-- <p><strong>Pays :</strong> {{ $destination->pays }}</p> -->
+                        <p><strong>Description :</strong> {{ $destination->description }}</p>
+                        <!-- <p><strong>Activité Locale :</strong> {{ $destination->activite_locale }}</p> -->
+                        <!-- <p><strong>Images :</strong> {{ $destination->images }}</p> -->
                         <p><strong>Adresse :</strong> {{ $destination->adresse }}</p>
                         <p><strong>Latitude :</strong> {{ $destination->latitude }}</p>
                         <p><strong>Longitude :</strong> {{ $destination->longitude }}</p>

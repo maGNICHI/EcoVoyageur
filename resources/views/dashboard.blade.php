@@ -164,28 +164,11 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
 
-      <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Paternaire</span>
-
-          </a>
-
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Certif</span>
-            </span>
-          </a>
-
-        </li>
-
         <li><a href="{{ route('destinations.index') }}">
         <i class="fa fa-edit"></i> Destination</a></li>
           <!-- <a href="pages/widgets.html">
             <i class="fa fa-th"></i> <span>Destination</span>
           </a> -->
-
         <li class="treeview">
         <li><a href="{{ route('events.index') }}">
         <i class="fa fa-edit"></i> Event</a></li>
@@ -228,20 +211,11 @@
           </a>
 
         </li>
-
         <li>
           <a href="{{ route('activites.index') }}">
             <i class="fa fa-edit"></i> <span>Activite</span>
 
           </a>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Avis</span>
-
-          </a>
-
         </li>
 
         <li class="treeview">
@@ -259,7 +233,6 @@
 
           </ul>
         </li>
-
 
   <!--!users-->
   <li class="treeview">

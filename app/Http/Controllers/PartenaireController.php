@@ -31,6 +31,7 @@ class PartenaireController extends Controller
             'adresse' => 'required|string|max:255', // Validation for adresse
             'telephone' => 'required|string|max:15', // Validation for telephone
             'type' => 'required|string|in:Partenaire Hébergement,Partenaire Transport,Partenaire Tourisme Responsable', // Validation for type
+            'type' => 'required|string|in:hebergement,transport,activite', // Validation for type
         ]);
 
         // Create a new partenaire
@@ -63,6 +64,7 @@ class PartenaireController extends Controller
             'adresse' => 'required|string|max:255', // Validation for adresse
             'telephone' => 'required|string|max:15', // Validation for telephone
             'type' => 'required|string|in:Partenaire Hébergement,Partenaire Transport,Partenaire Tourisme Responsable', // Validation for type
+            'type' => 'required|string|in:hebergement,transport,activite', // Validation for type
         ]);
 
         // Update the partenaire
