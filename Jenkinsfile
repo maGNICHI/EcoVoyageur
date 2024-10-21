@@ -122,7 +122,7 @@ pipeline {
 
     environment {
         GIT_REPO_URL = 'https://github.com/maGNICHI/EcoVoyageur.git'
-        GIT_BRANCH = 'Destination+Event' // S'assurer que le nom de branche est correct
+        GIT_BRANCH = 'Destination+Event' 
         DB_CONNECTION = 'mysql'
         DB_HOST = '127.0.0.1'
         DB_PORT = '3306'
@@ -130,11 +130,11 @@ pipeline {
         DB_USERNAME = 'root'
         DB_PASSWORD = '12345678'
 
-        DOCKER_IMAGE = 'ecovoyageur'  // Nom de l'image Docker
-        SONARQUBE_URL = 'http://http://192.168.1.34:9000'  // URL de SonarQube
-        NEXUS_URL = 'http://http://192.168.1.34:8081'  // URL de Nexus
-        NEXUS_REPO = 'maven-releases'  // Repository dans Nexus
-        NEXUS_CREDENTIALS_ID = 'nexus-credentials'  // ID des credentials Nexus
+        DOCKER_IMAGE = 'ecovoyageur'
+        SONARQUBE_URL = 'http://192.168.1.34:9000'  // Corrected URL
+        NEXUS_URL = 'http://192.168.1.34:8081'      // Corrected URL
+        NEXUS_REPO = 'maven-releases'
+        NEXUS_CREDENTIALS_ID = 'nexus-credentials'  // Ensure this ID is correct in Jenkins
     }
 
     stages {
@@ -202,7 +202,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube') {
-                        sh 'sonar-scanner'
+                        sh 'sonar-scanner -Dsonar.projectKey=your_project_key -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONAR_TOKEN}'
                     }
                 }
             }
@@ -237,7 +237,7 @@ pipeline {
         stage('Deploy to Production') {
             steps {
                 script {
-                    // Déployer l'image Docker sur le serveur de production
+                    // Deploy Docker image on production server
                     sh """
                         docker run -d -p 80:80 ${DOCKER_IMAGE}:latest
                     """
