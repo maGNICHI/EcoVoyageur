@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Destination;
 use Illuminate\Http\Request;
 use App\Models\Itineraire; // Ajoutez cette ligne pour importer le modèle
 
@@ -27,8 +28,10 @@ class ItineraireController extends Controller
      */
     public function create()
     {
-        return view('create'); // Créez une vue 'create.blade.php' dans 'resources/views/itineraires'
+        $destinations = Destination::all(); // Récupérer toutes les destinations
+        return view('create', compact('destinations')); // Passer les destinations à la vue
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -43,6 +46,7 @@ $request->validate([
     'nom' => 'required|string|max:255',
     'description' => 'required|string',
     'duree' => 'required|string|max:100',
+    'destination_id' => 'required|exists:destinations,id',
 ]);
 
 // Créer un nouvel itinéraire
@@ -50,6 +54,7 @@ Itineraire::create([
     'nom' => $request->nom,
     'description' => $request->description,
     'duree' => $request->duree,
+    'destination_id' => $request->destination_id,
 ]);
 
 // Rediriger vers la liste des itinéraires
@@ -76,7 +81,8 @@ return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succ�
     public function edit($id)
     {
         $itineraire = Itineraire::findOrFail($id); // Trouver l'itinéraire par son ID
-        return view('edit', compact('itineraire')); // Retourner la vue avec l'itinéraire    }
+        $destinations = Destination::all();
+        return view('edit', compact('itineraire', 'destinations')); // Retourner la vue avec l'itinéraire    }
     }
     /**
      * Update the specified resource in storage.
@@ -94,12 +100,14 @@ return redirect('/itineraires')->with('success', 'Itinéraire ajouté avec succ�
             'nom' => 'required|string|max:255',
             'description' => 'required|string',
             'duree' => 'required|string|max:255',
+            'destination_id' => 'required|exists:destinations,id',
         ]);
 
         // Mettre à jour l'itinéraire
         $itineraire->nom = $request->nom;
         $itineraire->description = $request->description;
         $itineraire->duree = $request->duree;
+        $itineraire->destination_id = $request->destination_id;
         $itineraire->save(); // Enregistrer les modifications
 
         return redirect()->route('itineraires.index')->with('success', 'Itinéraire mis à jour avec succès!');

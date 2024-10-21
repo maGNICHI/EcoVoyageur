@@ -9,6 +9,10 @@ use App\Http\Controllers\ItineraireController;
 use App\Http\Controllers\TransportController;
 use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\CertificatController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Models\Transport; // Ajoutez cette ligne pour importer le modèle Transport
+// use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,20 +28,33 @@ use App\Http\Controllers\CertificatController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::view('dashboard', 'dashboard');
+Auth::routes();
 
+
+// Route pour afficher le dashboard
+Route::get('/dashboard', function () {
+    return view('dashboard'); // Assurez-vous que la vue dashboard existe
+})->middleware('auth')->name('dashboard');
 
 Route::resource('itineraires', ItineraireController::class);
 Route::resource('transports', TransportController::class);
 Route::get('/itinerairestem', [ItineraireController::class, 'itineraireStem'])->name('itinerairestem');
 Route::get('/transportstem', [TransportController::class, 'transportStem'])->name('transportstem');
+Route::get('/search-transport', [TransportController::class, 'search'])->name('transport.search');
+
+Route::get('transports/{id}/download-pdf', [TransportController::class, 'downloadPDF'])->name('transports.download-pdf');
+
+
+
 
 Route::resource('destinations', DestinationController::class);
 Route::get('/destinations', [DestinationController::class, 'index'])->name('destinations.index');
 Route::get('/destination', [DestinationController::class, 'destination'])->name('destinations.destination');
 Route::get('/destinations/{id}', [ActiviteController::class, 'show'])->name('destination');
 
+
 Route::resource('events', EventController::class);
+Route::get('/event', [EventController::class, 'event'])->name('events.event');
 Route::resource('activites', ActiviteController::class);
 Route::get('/activites/{id}', [ActiviteController::class, 'show'])->name('activite');
 Route::resource('avis', AvisController::class);
@@ -52,3 +69,9 @@ Route::resource('certificats', CertificatController::class); // Added certificat
 Route::resource('partenaires', PartenaireController::class);
 Route::get('/certificatstem', [CertificatController::class, 'certificatStem'])->name('certificatstem'); // Added certificat stem route
 Route::get('/partenaireStem', [PartenaireController::class, 'partenaireStem'])->name('partenaireStem'); // Added patenaire stem route
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);});
