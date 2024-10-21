@@ -25,4 +25,27 @@ class Certificat extends Model
     {
         return $this->belongsTo(Partenaire::class);
     }
+<<<<<<< Updated upstream
+=======
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function averageRating()
+    {
+        return $this->ratings()->avg('rating');
+    }
+
+    public function isRatedBy(User $user = null)
+    {
+        $user = $user ?: Auth::user(); 
+        if (!$user) {
+            return false; // If no user is logged in, return false
+        }
+
+        return $this->ratings()->where('user_id', $user->id)->exists();
+    }
+>>>>>>> Stashed changes
 }

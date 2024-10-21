@@ -26,7 +26,6 @@ class Partenaire extends Model
         return $this->hasMany(Certificat::class);
     }
 
-    // Méthode pour récupérer les types de transport
     public static function types()
     {
         return ['Partenaire Hébergement', 'Partenaire Transport', 'Partenaire Tourisme Responsable'];

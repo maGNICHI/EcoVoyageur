@@ -29,8 +29,20 @@ class PartenaireController extends Controller
             'description' => 'required|string',
             'email' => 'required|email|max:255', // Validation for email
             'adresse' => 'required|string|max:255', // Validation for adresse
+<<<<<<< Updated upstream
             'telephone' => 'required|string|max:15', // Validation for telephone
             'type' => 'required|string|in:Partenaire Hébergement,Partenaire Transport,Partenaire Tourisme Responsable', // Validation for type
+=======
+            'telephone' => 'required|string|size:8', // Ensure exactly 8 characters for telephone
+            'type' => 'required|string|in:hebergement,transport,activite', // Validation for type
+        ], [
+            'description.min' => 'La description doit comporter au moins 20 caractères.',
+            'telephone.size' => 'Le numéro de téléphone doit comporter exactement 8 caractères.',
+            'email.required' => 'L\'email est requis.',
+            'adresse.required' => 'L\'adresse est requise.',
+            'nom.required' => 'Le nom est requis.',
+            'type.required' => 'Le type est requis',
+>>>>>>> Stashed changes
         ]);
 
         // Create a new partenaire

@@ -48,6 +48,16 @@ class CertificatController extends Controller
             'date_attribution' => 'required|date',
             'date_expiration' => 'required|date',
             'partenaire_id' => 'required|exists:partenaires,id',
+<<<<<<< Updated upstream
+=======
+        ], [
+            'nom.required' => 'Le nom est requis.',
+            'description.min' => 'La description doit comporter au moins 20 caractères',
+            'organisme_emetteur.required' => 'L\'organisme émetteur est requis.',
+            'date_attribution.after_or_equal' => 'La date d\'attribution doit être aujourd\'hui ou une date future.',
+            'date_expiration.after' => 'La date d\'expiration doit être après la date d\'attribution.',
+            'partenaire_id.required' => 'Le partenaire est requis.',
+>>>>>>> Stashed changes
         ]);
 
         // Create the certificat

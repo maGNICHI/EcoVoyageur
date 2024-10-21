@@ -95,8 +95,8 @@ nav.main-nav ul.nav li a:hover {
                             <li class="submenu">
                                 <a href="javascript:;">Partenaire</a>
                                 <ul>
-                                    <li><a href="{{ route('partenaireStem') }}">Partenaires</a></li>
-                                    <li><a href="{{ route('certificatstem') }}">Certificats</a></li>
+                                    <li><a href="{{ route('partenaireStem') }}">Partenaire</a></li>
+                                    <li><a href="{{ route('certificatstem') }}">Certificat</a></li>
 
                                 </ul>
                             </li>
