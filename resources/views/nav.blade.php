@@ -72,6 +72,7 @@ nav.main-nav ul.nav li a:hover {
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                         <li class="scroll-to-section"><a href="/" class="active">Home</a></li>
+
                             <li><a href="{{ route('activitestem') }}">Activites</a></li>
 
                             <li class="submenu">

@@ -76,6 +76,7 @@ input.form-control:focus {
 }
     
     </style>
+
 @extends('layouts.app')
 
 @section('content')

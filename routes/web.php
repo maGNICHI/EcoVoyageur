@@ -13,7 +13,6 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Models\Transport; // Ajoutez cette ligne pour importer le modèle Transport
 use Illuminate\Support\Facades\Auth;
-
 /*
 |--------------------------------------------------------------------------|
 | Web Routes                                                              |
@@ -36,6 +35,11 @@ Route::get('/dashboard', function () {
     return view('dashboard'); // Assurez-vous que la vue dashboard existe
 })->middleware('auth')->name('dashboard');
 
+
+// Route pour afficher le dashboard
+Route::get('/dashboard', function () {
+    return view('dashboard'); // Assurez-vous que la vue dashboard existe
+})->middleware('auth')->name('dashboard');
 
 Route::resource('itineraires', ItineraireController::class);
 Route::resource('transports', TransportController::class);
@@ -77,4 +81,3 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);});
-

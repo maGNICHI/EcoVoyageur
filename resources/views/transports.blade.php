@@ -23,17 +23,17 @@
         }
 
         .btn {
-            background-color: #007bff; /* Couleur de fond du bouton */
-            color: white; /* Couleur du texte */
-            padding: 8px 12px; /* Espacement interne */
-            text-decoration: none; /* Enlever le soulignement du lien */
-            border-radius: 4px; /* Coins arrondis */
-            transition: background-color 0.3s ease; /* Effet de transition */
-            cursor: pointer; /* Curseur de main */
+            background-color: #007bff;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
         }
 
         .btn:hover {
-            background-color: #0056b3; /* Couleur du bouton au survol */
+            background-color: #0056b3;
         }
 
         .btn-primary {
@@ -46,8 +46,8 @@
         }
 
         .btn-warning:hover {
-            background-color: #e0a800; /* Couleur au survol pour le bouton Modifier */
-            color: black; /* Maintenir la couleur du texte */
+            background-color: #e0a800;
+            color: black; 
         }
 
         .btn-danger {
