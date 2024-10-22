@@ -201,19 +201,20 @@ pipeline {
 stage('Run SonarQube Analysis') {
     steps {
         script {
-            withSonarQubeEnv('SonarQube') { // Ensure this matches your SonarQube server configuration
+            withSonarQubeEnv('SonarQube') {
                 def scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                 sh """
                     ${scannerHome}/bin/sonar-scanner \
                     -Dsonar.projectKey=sonarqube \
                     -Dsonar.host.url=${SONARQUBE_URL} \
-                    -Dsonar.login=admin \   // Replace 'admin' with your SonarQube username
-                    -Dsonar.password=sonar  // Replace 'sonar' with your SonarQube password
+                    -Dsonar.login=admin \
+                    -Dsonar.password=sonar
                 """
             }
         }
     }
 }
+
 
 
 
