@@ -204,7 +204,7 @@ pipeline {
                     // Using SonarQube environment and proper tool configuration
                     withSonarQubeEnv('SonarQube') {
                         def scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                        withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                        withCredentials([string(credentialsId: 'retail token', variable: 'SONAR_TOKEN')]) {
                             sh """
                                 ${scannerHome}/bin/sonar-scanner \
                                 -Dsonar.projectKey=sonarqube \
