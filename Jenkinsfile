@@ -109,20 +109,20 @@ pipeline {
             }
         }
 
-stage('Upload Docker Image to Nexus') {
-    steps {
-        script {
-            // Tag Docker image for Nexus (without http:// in the tag)
-            sh """
-                docker tag ${DOCKER_IMAGE}:latest 192.168.1.34:8081/repository/${NEXUS_REPO}/${DOCKER_IMAGE}:latest
-            """
-            // Push image to Nexus
-            sh """
-                docker push 192.168.1.34:8081/repository/${NEXUS_REPO}/${DOCKER_IMAGE}:latest
-            """
-        }
-    }
-}
+// stage('Upload Docker Image to Nexus') {
+//     steps {
+//         script {
+//             // Tag Docker image for Nexus (without http:// in the tag)
+//             sh """
+//                 docker tag ${DOCKER_IMAGE}:latest 192.168.1.34:8081/repository/${NEXUS_REPO}/${DOCKER_IMAGE}:latest
+//             """
+//             // Push image to Nexus
+//             sh """
+//                 docker push 192.168.1.34:8081/repository/${NEXUS_REPO}/${DOCKER_IMAGE}:latest
+//             """
+//         }
+//     }
+// }
 
 
         stage('Deploy to Production') {
