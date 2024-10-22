@@ -130,7 +130,7 @@ pipeline {
                 script {
                     // Deploy Docker image on production server
                     sh """
-                        docker run -d -p 80:80 ${DOCKER_IMAGE}:latest
+                        docker run -d -p 80:87 ${DOCKER_IMAGE}:latest
                     """
                 }
             }
