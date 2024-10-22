@@ -198,24 +198,25 @@ pipeline {
             }
         }
 
-        stage('Run SonarQube Analysis') {
-            steps {
-                script {
-                    // Using SonarQube environment and proper tool configuration
-                    withSonarQubeEnv('SonarQube') {
-                        def scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                        withCredentials([string(credentialsId: 'retail token', variable: 'SONAR_TOKEN')]) {
-                            sh """
-                                ${scannerHome}/bin/sonar-scanner \
-                                -Dsonar.projectKey=sonarqube \
-                                -Dsonar.host.url=${SONARQUBE_URL} \
-                                -Dsonar.login=${SONAR_TOKEN}
-                            """
-                        }
-                    }
+stage('Run SonarQube Analysis') {
+    steps {
+        script {
+            withSonarQubeEnv('SonarQube') { // 'SonarQube' must match the name set in Jenkins SonarQube configuration
+                def scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                withCredentials([string(credentialsId: 'retail token', variable: 'SONAR_TOKEN')]) { // Use the correct credential ID for the SonarQube token
+                    sh """
+                        ${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=sonarqube \
+                        -Dsonar.host.url=${SONARQUBE_URL} \
+                        -Dsonar.login=${SONAR_TOKEN} \
+                        -X
+                    """
                 }
             }
         }
+    }
+}
+
 
         stage('Build Docker Image') {
             steps {
