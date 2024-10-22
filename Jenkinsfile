@@ -198,22 +198,22 @@ pipeline {
             }
         }
 
-stage('Run SonarQube Analysis') {
-    steps {
-        script {
-            withSonarQubeEnv('SonarQube') {
-                def scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                sh """
-                    ${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.projectKey=sonarqube \
-                    -Dsonar.host.url=${SONARQUBE_URL} \
-                    -Dsonar.login=admin \
-                    -Dsonar.password=sonar
-                """
-            }
-        }
-    }
-}
+// stage('Run SonarQube Analysis') {
+//     steps {
+//         script {
+//             withSonarQubeEnv('SonarQube') {
+//                 def scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+//                 sh """
+//                     ${scannerHome}/bin/sonar-scanner \
+//                     -Dsonar.projectKey=sonarqube \
+//                     -Dsonar.host.url=${SONARQUBE_URL} \
+//                     -Dsonar.login=admin \
+//                     -Dsonar.password=sonar
+//                 """
+//             }
+//         }
+//     }
+// }
 
 
 
